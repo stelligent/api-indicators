@@ -1,4 +1,11 @@
 ApiIndicators::Application.routes.draw do
+  namespace :api do
+    namespace :v1 do
+    end
+  end
+
+  root to: 'pages#root'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

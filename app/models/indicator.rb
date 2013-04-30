@@ -1,7 +1,7 @@
 class Indicator < ActiveRecord::Base
   attr_accessible :indicator_type_id, :project_id
 
-  belongs_to :type, foreign_key: :indicator_type_id
+  belongs_to :type, class_name: "IndicatorType", foreign_key: :indicator_type_id
   belongs_to :project
   has_many :events, class_name: "IndicatorEvent", dependent: :destroy
 

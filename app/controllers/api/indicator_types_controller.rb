@@ -1,27 +1,35 @@
 class Api::IndicatorTypesController < ApplicationController
   before_filter :authenticate, except: [ :index, :show ]
 
-  # GET /api/indicator_types
+  # GET /api/services
   def index
-    @indicator_types = IndicatorType.all
+    @indicator_types = IndicatorType.all.map do |indicator_type|
+      {
+        id: indicator_type.id,
+        name: indicator_type.name
+      }
+    end
     render json: @indicator_types
   end
 
-  # POST /api/indicator_types
+  # POST /api/services
   def create
   end
 
-  # GET /api/indicator_types/:id
+  # GET /api/services/:id
   def show
-    @indicator_types = IndicatorType.find(params[:id])
-    render json: @indicator_type
+    @indicator_type = IndicatorType.find(params[:id])
+    render json: {
+      id: @indicator_type.id,
+      name: @indicator_type.name
+    }
   end
 
-  # PUT /api/indicator_types/:id
+  # PUT /api/services/:id
   def update
   end
 
-  # DELETE /api/indicator_types/:id
+  # DELETE /api/services/:id
   def destroy
   end
 end

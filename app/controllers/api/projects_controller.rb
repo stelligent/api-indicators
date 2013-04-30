@@ -3,7 +3,12 @@ class Api::ProjectsController < ApplicationController
 
   # GET /api/projects
   def index
-    @projects = Project.all
+    @projects = Project.all.map do |project|
+      {
+        id: project.id,
+        name: project.name
+      }
+    end
     render json: @projects
   end
 
@@ -14,7 +19,10 @@ class Api::ProjectsController < ApplicationController
   # GET /api/projects/:id
   def show
     @project = Project.find(params[:id])
-    render json: @project
+    render json: {
+      id: @project.id,
+      name: @project.name
+    }
   end
 
   # PUT /api/projects/:id

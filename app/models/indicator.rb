@@ -1,9 +1,9 @@
 class Indicator < ActiveRecord::Base
-  attr_accessible :indicator_type_id, :project_id
+  attr_accessible :service_id, :project_id
 
-  belongs_to :type, class_name: "IndicatorType", foreign_key: :indicator_type_id
+  belongs_to :service
   belongs_to :project
-  has_many :events, class_name: "IndicatorEvent", dependent: :destroy
+  has_many :events, dependent: :destroy
 
   after_create :set_on_create
 
@@ -11,19 +11,19 @@ class Indicator < ActiveRecord::Base
     "#{project.name} - #{type.name}"
   end
 
-  # Gets current state of indicator.
-  def current_state
-    events.last.state
+  # Gets current status of indicator.
+  def current_status
+    events.last.status
   end
 
   def history size = 10
     events.desc.limit(size)
   end
 
-  def set state, description = nil
+  def set state, message = nil
     events.create(
-      indicator_state_id: IndicatorState.find_by_name(state).id,
-      description: description
+      status_id: Status.find_by_name(state).id,
+      message: message
       )
   end
 
@@ -32,7 +32,7 @@ class Indicator < ActiveRecord::Base
   # Used in after_create callback.
   # Sets default state of every new indicator.
   def set_on_create
-    IndicatorState.create(name: IndicatorState::DEFAULT) unless IndicatorState.default
-    set IndicatorState::DEFAULT
+    Status.create(name: Status::DEFAULT) unless Status.default
+    set Status::DEFAULT
   end
 end

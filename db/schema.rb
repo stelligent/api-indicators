@@ -13,24 +13,16 @@
 
 ActiveRecord::Schema.define(:version => 20130429141805) do
 
-  create_table "indicator_events", :force => true do |t|
+  create_table "events", :force => true do |t|
     t.integer  "indicator_id"
-    t.integer  "indicator_state_id"
-    t.text     "description"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
-  end
-
-  create_table "indicator_states", :force => true do |t|
-    t.string "name"
-  end
-
-  create_table "indicator_types", :force => true do |t|
-    t.string "name"
+    t.integer  "status_id"
+    t.text     "message"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "indicators", :force => true do |t|
-    t.integer "indicator_type_id"
+    t.integer "service_id"
     t.integer "project_id"
   end
 
@@ -38,6 +30,14 @@ ActiveRecord::Schema.define(:version => 20130429141805) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "services", :force => true do |t|
+    t.string "name"
+  end
+
+  create_table "statuses", :force => true do |t|
+    t.string "name"
   end
 
 end

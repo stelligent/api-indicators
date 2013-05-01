@@ -1,9 +1,9 @@
-class IndicatorState < ActiveRecord::Base
+class Status < ActiveRecord::Base
   DEFAULT = "green"
 
   attr_accessible :name
 
-  has_many :events, foreign_key: :indicator_state_id
+  has_many :events
 
   validates :name, presence: true, uniqueness: true
 

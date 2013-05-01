@@ -1,11 +1,10 @@
 ApiIndicators::Application.routes.draw do
   namespace :api do
-    resources :projects, only: [ :index, :create, :show, :update, :destroy ] do
-      resources :indicators, only: [ :index ] do
-        resources :indicator_events, only: [ :index ], path: 'events', as: 'events'
-      end
+    resources :projects, only: [ :index, :create, :show, :update, :destroy ]
+    resources :services, only: [ :index, :create, :show, :update, :destroy ]
+    resources :indicators, only: [ :index, :show ] do
+      resources :events, only: [ :index ]
     end
-    resources :indicator_types, only: [ :index, :create, :show, :update, :destroy ], path: 'services'
   end
 
   root to: 'pages#root'

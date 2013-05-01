@@ -1,4 +1,4 @@
-class IndicatorType < ActiveRecord::Base
+class Service < ActiveRecord::Base
   attr_accessible :name
 
   has_many :indicators, dependent: :destroy
@@ -10,7 +10,7 @@ class IndicatorType < ActiveRecord::Base
   private
 
   # Used in after_create callback.
-  # Creates indicators of newly created type for each project.
+  # Creates indicators of newly created service for each project.
   def create_indicators
     Project.all.each do |project|
       indicators.create(project_id: project.id)

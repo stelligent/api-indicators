@@ -1,3 +1,3 @@
-IndicatorState.create(name: "green")
-IndicatorState.create(name: "yellow")
-IndicatorState.create(name: "red")
+Status.create(name: "green")
+Status.create(name: "yellow")
+Status.create(name: "red")

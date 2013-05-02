@@ -18,9 +18,9 @@ class Api::IndicatorsController < ApplicationController
   def return_format indicator
     {
       id: indicator.id,
-      project: indicator.project.name,
-      service: indicator.service.name,
-      status: indicator.current_status.name
+      project_id: indicator.project.id,
+      service_id: indicator.service.id,
+      current_status_id: indicator.current_status.id
     }
   end
 end

@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   def authenticate
     unless params[:api_key] == "test"
-      render json: { error: "Unauthenticated" }
+      render json: { error: "Unauthorized action" }
     end
   end
 end

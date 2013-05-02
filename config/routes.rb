@@ -3,8 +3,9 @@ ApiIndicators::Application.routes.draw do
     resources :projects, only: [ :index, :create, :show, :update, :destroy ]
     resources :services, only: [ :index, :create, :show, :update, :destroy ]
     resources :indicators, only: [ :index, :show ] do
-      resources :events, only: [ :index ]
+      resources :events, only: [ :index, :create, :show, :update, :destroy ]
     end
+    resources :statuses, only: [ :index ]
   end
 
   root to: 'pages#root'

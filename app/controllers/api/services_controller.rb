@@ -28,10 +28,22 @@ class Api::ServicesController < ApplicationController
 
   # PUT /api/services/:id
   def update
+    @service = Service.find(params[:id])
+    if @service.update_attributes(params[:service])
+      render json: return_format(@service)
+    else
+      render json: @service.errors
+    end
   end
 
   # DELETE /api/services/:id
   def destroy
+    @service = Service.find(params[:id])
+    if @service.destroy
+      render json: return_format(@service)
+    else
+      render json: @service.errors
+    end
   end
 
   private

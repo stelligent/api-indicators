@@ -11,7 +11,15 @@ module PagesHelper
       else
         ""
       end
-    message = indicator.current_state.message || "No message"
-    content_tag :a, "&nbsp;".html_safe, class: "indicator btn #{color}", "data-content" => message
+
+    options = {
+      :class => "indicator btn #{color}",
+      "data-title" => "#{indicator.current_state.created_at.strftime("%H:%M, %b %-d, %Y")}",
+      "data-content" => indicator.current_state.message || "No message"
+    }
+
+    link_to_if indicator.has_page, "&nbsp;".html_safe, indicator_path(indicator), options do
+      content_tag :a, "&nbsp;".html_safe, options
+    end
   end
 end

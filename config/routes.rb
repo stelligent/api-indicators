@@ -8,6 +8,7 @@ ApiIndicators::Application.routes.draw do
     resources :statuses, only: [ :index ]
   end
 
+  resources :indicators, only: [ :show ]
   root to: 'pages#root'
 
   # The priority is based upon order of creation:

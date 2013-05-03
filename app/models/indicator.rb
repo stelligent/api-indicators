@@ -1,5 +1,5 @@
 class Indicator < ActiveRecord::Base
-  attr_accessible :service_id, :project_id
+  attr_accessible :service_id, :project_id, :has_page
 
   belongs_to :service
   belongs_to :project

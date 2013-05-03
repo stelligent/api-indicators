@@ -1,0 +1,12 @@
+<p><%= link_to "&larr; Back".html_safe, root_path %></p>
+
+<h2><%= @indicator.name %></h2>
+
+<table class="table" style="width: auto;">
+  <thead><tr><td><h4>History</h4></td></tr></thead>
+  <tbody>
+    <% @indicator.get_history.each do |event| %>
+    <%= history_row event %>
+    <% end %>
+  </tbody>
+</table>

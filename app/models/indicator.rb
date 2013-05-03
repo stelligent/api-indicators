@@ -14,8 +14,8 @@ class Indicator < ActiveRecord::Base
   end
 
   # Gets current status of indicator.
-  def current_status
-    events.last.status
+  def current_state
+    events.first
   end
 
   def history_size

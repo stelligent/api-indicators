@@ -4,5 +4,7 @@ class Event < ActiveRecord::Base
   belongs_to :indicator
   belongs_to :status
 
+  validates :status_id, presence: true
+
   default_scope order("created_at DESC")
 end

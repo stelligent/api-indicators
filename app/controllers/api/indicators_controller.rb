@@ -21,7 +21,7 @@ class Api::IndicatorsController < ApplicationController
       name: indicator.name,
       project_id: indicator.project.id,
       service_id: indicator.service.id,
-      current_status_id: indicator.current_status.id,
+      current_status_id: indicator.current_state.status.id,
       history_size: indicator.history_size
     }
   end

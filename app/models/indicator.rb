@@ -5,6 +5,8 @@ class Indicator < ActiveRecord::Base
   belongs_to :project
   has_many :events, dependent: :destroy
 
+  default_scope order(:project_id, :service_id)
+
   after_create :set_on_create
 
   def name
@@ -16,8 +18,12 @@ class Indicator < ActiveRecord::Base
     events.last.status
   end
 
-  def history size = 10
-    events.desc.limit(size)
+  def history_size
+    events.count
+  end
+
+  def get_history size = 10
+    events.limit(size)
   end
 
   def set state, message = nil

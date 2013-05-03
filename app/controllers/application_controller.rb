@@ -3,9 +3,9 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  def authenticate
-    unless params[:api_key] == "test"
-      render json: { error: "Unauthorized action" }
+  def restrict_access
+    authenticate_or_request_with_http_token do |token, options|
+      ApiKey.exists?(access_token: token)
     end
   end
 end

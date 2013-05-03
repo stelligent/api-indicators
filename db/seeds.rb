@@ -1,3 +1,3 @@
-Status.create(name: "green")
-Status.create(name: "yellow")
-Status.create(name: "red")
+["green", "yellow", "red"].each do |color|
+  Status.create(name: color)
+end

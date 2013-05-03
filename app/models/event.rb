@@ -4,6 +4,5 @@ class Event < ActiveRecord::Base
   belongs_to :indicator
   belongs_to :status
 
-  default_scope order("created_at")
-  scope :desc, order("created_at DESC")
+  default_scope order("created_at DESC")
 end

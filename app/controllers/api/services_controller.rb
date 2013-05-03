@@ -1,6 +1,6 @@
 class Api::ServicesController < ApplicationController
   skip_before_filter :verify_authenticity_token
-  before_filter :authenticate, except: [ :index, :show ]
+  before_filter :restrict_access, except: [ :index, :show ]
 
   # GET /api/services
   def index

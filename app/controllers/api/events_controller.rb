@@ -1,4 +1,7 @@
 class Api::EventsController < ApplicationController
+  skip_before_filter :verify_authenticity_token
+  before_filter :restrict_access, except: [ :index, :show ]
+
   # GET /api/indicators/:indicator_id/events
   def index
     @events = Indicator.find(params[:indicator_id]).events.map do |event|

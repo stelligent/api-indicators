@@ -10,7 +10,7 @@ class Indicator < ActiveRecord::Base
   after_create :set_on_create
 
   def name
-    "#{project.name} - #{type.name}"
+    "#{project.name}: #{service.name}"
   end
 
   # Gets current status of indicator.

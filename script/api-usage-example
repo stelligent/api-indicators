@@ -71,7 +71,7 @@ puts indicators = get("/indicators")
 puts "\tListing available statuses"
 puts statuses = get("/statuses")
 
-puts "\tUpdating indicator's status"
+puts "\tCreating new event for indicator aka Updating indicator's status (returns created event)"
 # Finding indicator for new service
 indicator = indicators.select { |i| i[:project_id] == project[:id] and i[:service_id] == service[:id] }.first
 # Finding status to set

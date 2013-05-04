@@ -6,5 +6,5 @@ class Event < ActiveRecord::Base
 
   validates :status_id, presence: true
 
-  default_scope order("created_at ASC")
+  default_scope order("created_at DESC")
 end

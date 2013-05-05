@@ -1,20 +1,20 @@
 class Api::EventsController < ApplicationController
   skip_before_filter :verify_authenticity_token
+  before_filter :get_events
+  before_filter :get_event, only: [ :show, :update, :destroy ]
   before_filter :restrict_access, except: [ :index, :show ]
 
   # GET /api/indicators/:indicator_id/events
   def index
-    @events = Indicator.find(params[:indicator_id]).events.map do |event|
-      return_format event
-    end
+    @events.map!(&:api_return_format)
     render json: @events
   end
 
   # POST /api/indicators/:indicator_id/events
   def create
-    @event = Indicator.find(params[:indicator_id]).events.new(params[:event])
+    @event = @events.new(params[:event])
     if @event.save
-      render json: return_format(@event)
+      render json: @event.api_return_format
     else
       render json: @event.errors
     end
@@ -22,15 +22,13 @@ class Api::EventsController < ApplicationController
 
   # GET /api/indicators/:indicator_id/events/:id
   def show
-    @event = Indicator.find(params[:indicator_id]).events.find(params[:id])
-    render json: return_format(@event)
+    render json: @event.api_return_format
   end
 
   # PUT /api/indicators/:indicator_id/events/:id
   def update
-    @event = Indicator.find(params[:indicator_id]).events.find(params[:id])
     if @event.update_attributes(params[:event])
-      render json: return_format(@event)
+      render json: @event.api_return_format
     else
       render json: @event.errors
     end
@@ -38,9 +36,8 @@ class Api::EventsController < ApplicationController
 
   # DELETE /api/indicators/:indicator_id/events/:id
   def destroy
-    @event = Indicator.find(params[:indicator_id]).events.find(params[:id])
     if @event.destroy
-      render json: return_format(@event)
+      render json: @event.api_return_format
     else
       render json: @event.errors
     end
@@ -48,12 +45,11 @@ class Api::EventsController < ApplicationController
 
   private
 
-  def return_format event
-    {
-      id: event.id,
-      time: event.created_at,
-      state: event.status.name,
-      message: event.message || ""
-    }
+  def get_events
+    @events ||= Indicator.find(params[:indicator_id]).events rescue render(json: {error: "No such indicator"}) and return
+  end
+
+  def get_event
+    @event ||= @events.find(params[:id]) rescue render(json: {error: "No such event"}) and return
   end
 end

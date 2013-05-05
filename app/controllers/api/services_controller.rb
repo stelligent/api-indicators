@@ -1,12 +1,11 @@
 class Api::ServicesController < ApplicationController
   skip_before_filter :verify_authenticity_token
+  before_filter :get_service, only: [ :show, :update, :destroy ]
   before_filter :restrict_access, except: [ :index, :show ]
 
   # GET /api/services
   def index
-    @services = Service.all.map do |service|
-      return_format service
-    end
+    @services = Service.all.map(&:api_return_format)
     render json: @services
   end
 
@@ -14,7 +13,7 @@ class Api::ServicesController < ApplicationController
   def create
     @service = Service.new(params[:service])
     if @service.save
-      render json: return_format(@service)
+      render json: @service.api_return_format
     else
       render json: @service.errors
     end
@@ -22,15 +21,13 @@ class Api::ServicesController < ApplicationController
 
   # GET /api/services/:id
   def show
-    @service = Service.find(params[:id])
-    render json: return_format(@service)
+    render json: @service.api_return_format
   end
 
   # PUT /api/services/:id
   def update
-    @service = Service.find(params[:id])
     if @service.update_attributes(params[:service])
-      render json: return_format(@service)
+      render json: @service.api_return_format
     else
       render json: @service.errors
     end
@@ -38,9 +35,8 @@ class Api::ServicesController < ApplicationController
 
   # DELETE /api/services/:id
   def destroy
-    @service = Service.find(params[:id])
     if @service.destroy
-      render json: return_format(@service)
+      render json: @service.api_return_format
     else
       render json: @service.errors
     end
@@ -48,10 +44,7 @@ class Api::ServicesController < ApplicationController
 
   private
 
-  def return_format service
-    {
-      id: service.id,
-      name: service.name
-    }
+  def get_service
+    @service = Service.find(params[:id]) rescue render(json: { error: "No such service" }) and return
   end
 end

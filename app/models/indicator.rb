@@ -33,7 +33,21 @@ class Indicator < ActiveRecord::Base
       )
   end
 
-  private
+  def api_return_format
+    {
+      id: self.id,
+      project: {
+        id: self.project.id,
+        name: self.project.name
+      },
+      service: {
+        id: self.service.id,
+        name: self.service.name
+      }
+    }
+  end
+
+private
 
   # Used in after_create callback.
   # Sets default state of every new indicator.

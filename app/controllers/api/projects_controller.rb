@@ -1,5 +1,6 @@
 class Api::ProjectsController < ApplicationController
   skip_before_filter :verify_authenticity_token
+  before_filter :get_project, only: [ :show, :update, :destroy ]
   before_filter :restrict_access, except: [ :index, :show ]
 
   # GET /api/projects
@@ -22,13 +23,11 @@ class Api::ProjectsController < ApplicationController
 
   # GET /api/projects/:id
   def show
-    @project = Project.find(params[:id])
     render json: return_format(@project)
   end
 
   # PUT /api/projects/:id
   def update
-    @project = Project.find(params[:id])
     if @project.update_attributes(params[:project])
       render json: return_format(@project)
     else
@@ -38,7 +37,6 @@ class Api::ProjectsController < ApplicationController
 
   # DELETE /api/projects/:id
   def destroy
-    @project = Project.find(params[:id])
     if @project.destroy
       render json: return_format(@project)
     else
@@ -47,6 +45,10 @@ class Api::ProjectsController < ApplicationController
   end
 
   private
+
+  def get_project
+    @project = Project.find(params[:id]) rescue render(json: { error: "No such project" }) and return
+  end
 
   def return_format project
     {

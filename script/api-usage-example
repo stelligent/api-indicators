@@ -73,13 +73,12 @@ puts statuses = get("/statuses")
 
 puts "\tCreating new event for indicator aka Updating indicator's status (returns created event)"
 # Finding indicator for new service
-indicator = indicators.select { |i| i[:project_id] == project[:id] and i[:service_id] == service[:id] }.first
+indicator = indicators.select { |i| i[:project][:id] == project[:id] and i[:service][:id] == service[:id] }.first
 # Finding status to set
 status = statuses.select { |i| i[:name] == "red" }.first
-puts post "/indicators/#{indicator[:id]}/events", { event: {
+puts post "/indicators/#{indicator[:id]}/events", event: {
   message: "sorry guys system went down",
   status_id: status[:id]
-  }
 }
 
 puts "\tListing indicator's history"

@@ -26,9 +26,9 @@ class Indicator < ActiveRecord::Base
     events.limit(size)
   end
 
-  def set state, message = nil
+  def set status, message = nil
     events.create(
-      status_id: Status.find_by_name(state).id,
+      status_id: Status.find_or_create_by_name(status).id,
       message: message
       )
   end
@@ -46,7 +46,6 @@ private
   # Used in after_create callback.
   # Sets default state of every new indicator.
   def set_on_create
-    Status.create(name: Status::DEFAULT) unless Status.default
     set Status::DEFAULT, "Initialization"
   end
 end

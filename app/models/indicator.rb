@@ -47,6 +47,6 @@ private
   # Sets default state of every new indicator.
   def set_on_create
     Status.create(name: Status::DEFAULT) unless Status.default
-    set Status::DEFAULT
+    set Status::DEFAULT, "Initialization"
   end
 end

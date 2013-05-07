@@ -7,6 +7,13 @@ class Project < ActiveRecord::Base
 
   after_create :create_indicators
 
+  def api_return_format
+    {
+      id: self.id,
+      name: self.name
+    }
+  end
+
   private
 
   # Used in after_create callback.

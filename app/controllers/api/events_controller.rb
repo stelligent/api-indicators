@@ -2,7 +2,7 @@ class Api::EventsController < ApplicationController
   skip_before_filter :verify_authenticity_token
   before_filter :get_events
   before_filter :get_event, only: [ :show, :update, :destroy ]
-  before_filter :restrict_access, except: [ :index, :show ]
+  before_filter :restrict_api_access, except: [ :index, :show ]
 
   # GET /api/indicators/:indicator_id/events
   def index

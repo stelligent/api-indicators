@@ -3,4 +3,7 @@ class PagesController < ApplicationController
     @projects = Project.all
     @services = Service.all
   end
+
+  def docs
+  end
 end

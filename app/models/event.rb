@@ -12,10 +12,7 @@ class Event < ActiveRecord::Base
     {
       id: self.id,
       time: self.created_at,
-      state: {
-        id: self.status.id,
-        name: self.status.name
-      },
+      status: self.status.api_return_format,
       message: self.message || ""
     }
   end

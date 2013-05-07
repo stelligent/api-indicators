@@ -1,6 +1,5 @@
-<p><%= link_to "&larr; Back".html_safe, root_path %></p>
-
-<h2><%= @indicator.name %></h2>
+<% title @indicator.name %>
+<%= content_tag :h2, @indicator.name %>
 
 <table class="table" style="width: auto;">
   <thead><tr><td><h4>History</h4></td></tr></thead>

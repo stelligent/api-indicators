@@ -9,7 +9,19 @@ ApiIndicators::Application.routes.draw do
   end
 
   resources :indicators, only: [ :show ]
-  root to: 'pages#root'
+
+  controller :sessions do
+    get "login" => :new
+    post "login" => :create
+    get "logout" => :destroy
+  end
+
+  resource :profile, controller: :users, only: [ :show, :edit, :update ]
+
+  controller :pages do
+    get "docs" => :docs
+    root to: :root
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

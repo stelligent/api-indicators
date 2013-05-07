@@ -36,14 +36,8 @@ class Indicator < ActiveRecord::Base
   def api_return_format
     {
       id: self.id,
-      project: {
-        id: self.project.id,
-        name: self.project.name
-      },
-      service: {
-        id: self.service.id,
-        name: self.service.name
-      }
+      project: self.project.api_return_format,
+      service: self.service.api_return_format
     }
   end
 

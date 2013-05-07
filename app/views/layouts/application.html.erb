@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Status</title>
+  <title>Status<%= content_for?(:title) ? " | #{yield :title}" : "" %></title>
   <!--[if lt IE 9]
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
   <![endif]-->
@@ -11,13 +11,40 @@
 </head>
 <body>
 
-<!--div style="position: absolute; top: 5px; right: 5px;">
-  <%= link_to_if current_user, "Login", "", class: "btn btn-primary btn-small" do %>
-    <%= link_to "Logout", "", class: "btn btn-inverse btn-small" %>
-  <% end %>
-</div-->
+<header class="navbar navbar-inverse navbar-static-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <%= link_to "Status", root_path, class: "brand" %>
+      <nav class="nav-collapse collapse">
+        <ul class="nav pull-right">
+          <% unless current_user %>
+          <li><%= link_to "Log in", login_path %></li>
+          <% else %>
+          <li><%= link_to "Profile", profile_path %></li>
+          <li><%= link_to "Log out", logout_path %></li>
+          <% end %>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
 
-<%= yield %>
+<div class="container" style="margin: 30px auto;">
+  <%= yield %>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <span class="pull-left">
+      Status app
+    </span>
+    <nav>
+      <ul class="nav pull-right">
+        <li><%= link_to "Docs", docs_path %></li>
+      </ul>
+    </nav>
+  </div>
+</footer>
 
 </body>
 </html>

@@ -10,4 +10,11 @@ class Status < ActiveRecord::Base
   def self.default
     find_by_name(DEFAULT)
   end
+
+  def api_return_format
+    {
+      id: self.id,
+      name: self.name
+    }
+  end
 end

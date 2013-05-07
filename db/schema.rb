@@ -11,13 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130503222206) do
-
-  create_table "api_keys", :force => true do |t|
-    t.string   "access_token"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-  end
+ActiveRecord::Schema.define(:version => 20130507114519) do
 
   create_table "events", :force => true do |t|
     t.integer  "indicator_id"
@@ -45,6 +39,14 @@ ActiveRecord::Schema.define(:version => 20130503222206) do
 
   create_table "statuses", :force => true do |t|
     t.string "name"
+  end
+
+  create_table "users", :force => true do |t|
+    t.string   "name"
+    t.string   "password_digest"
+    t.string   "api_key"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
 end

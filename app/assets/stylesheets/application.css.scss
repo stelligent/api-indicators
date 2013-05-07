@@ -14,9 +14,16 @@
 
 @import "bootstrap";
 
-body {
-  margin: 10px;
-  h2 {
-    margin: 0;
+table td {
+  padding: 3px;
+}
+
+footer {
+  margin: 20px 0;
+  padding: 20px 0;
+  border-top: 1px solid #eee;
+  color: #ccc;
+  a {
+    color: #ccc;
   }
 }

@@ -22,4 +22,8 @@ module PagesHelper
       content_tag :a, "&nbsp;".html_safe, options
     end
   end
+
+  def api_request_code path, method
+    content_tag :code, "#{method.upcase} http://#{request.env['HTTP_HOST']}/api/#{path}"
+  end
 end

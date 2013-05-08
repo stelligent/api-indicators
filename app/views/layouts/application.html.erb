@@ -9,42 +9,41 @@
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
-<body>
 
-<header class="navbar navbar-inverse navbar-static-top">
-  <div class="navbar-inner">
+<body>
+  <header class="navbar navbar-inverse navbar-static-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <%= link_to "Status", root_path, class: "brand" %>
+        <nav class="nav-collapse collapse">
+          <ul class="nav pull-right">
+            <% unless current_user %>
+            <li><%= link_to "Log in", login_path %></li>
+            <% else %>
+            <li><%= link_to "Profile", profile_path %></li>
+            <li><%= link_to "Log out", logout_path %></li>
+            <% end %>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <div class="container" style="margin: 30px auto;">
+    <%= yield %>
+  </div>
+
+  <footer class="footer">
     <div class="container">
-      <%= link_to "Status", root_path, class: "brand" %>
-      <nav class="nav-collapse collapse">
+      <span class="pull-left">
+        Status app
+      </span>
+      <nav>
         <ul class="nav pull-right">
-          <% unless current_user %>
-          <li><%= link_to "Log in", login_path %></li>
-          <% else %>
-          <li><%= link_to "Profile", profile_path %></li>
-          <li><%= link_to "Log out", logout_path %></li>
-          <% end %>
+          <li><%= link_to "Docs", docs_path %></li>
         </ul>
       </nav>
     </div>
-  </div>
-</header>
-
-<div class="container" style="margin: 30px auto;">
-  <%= yield %>
-</div>
-
-<footer class="footer">
-  <div class="container">
-    <span class="pull-left">
-      Status app
-    </span>
-    <nav>
-      <ul class="nav pull-right">
-        <li><%= link_to "Docs", docs_path %></li>
-      </ul>
-    </nav>
-  </div>
-</footer>
-
+  </footer>
 </body>
 </html>

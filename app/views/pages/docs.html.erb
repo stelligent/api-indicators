@@ -1,2 +1,45 @@
 <% title "Documentation" %>
-<h3>API Documentation</h3>
+
+<div class="row">
+  <div class="span9">
+    <h2>API Documentation</h2>
+    <section id="projects">
+      <a name="projects-list"></a><h3 class="page-header">Projects: list</h3>
+      <p>Returns a list of projects.</p>
+      <h4>Request</h4>
+      <%= api_request_code "projects", "get" %>
+      <h4>Response</h4>
+<pre>
+[
+  {
+    "id": {integer},
+    "name": {string}
+  },
+
+  ...
+]
+</pre>
+      <a name="projects-get"></a><h3 class="page-header">Projects: get</h3>
+      <p>Returns a specified project.</p>
+      <h4>Request</h4>
+      <%= api_request_code "projects/{project_id}", "get" %>
+      <h4>Response</h4>
+<pre>
+{
+  "id": {integer},
+  "name": {string}
+}
+</pre>
+    </section>
+  </div>
+
+  <div class="span3">
+    <div class="well well-small">
+      <ul class="nav nav-list">
+        <li class="nav-header">Projects</li>
+        <li><a href="#projects-list">list</a></li>
+        <li><a href="#projects-get">get</a></li>
+      </ul>
+    </div>
+  </div>
+</div>

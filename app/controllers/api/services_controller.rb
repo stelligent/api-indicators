@@ -1,12 +1,10 @@
-class Api::ServicesController < ApplicationController
-  skip_before_filter :verify_authenticity_token
+class Api::ServicesController < ApiController
   before_filter :get_service, only: [ :show, :update, :destroy ]
   before_filter :restrict_api_access, except: [ :index, :show ]
 
   # GET /api/services
   def index
-    @services = Service.all.map(&:api_return_format)
-    render json: @services
+    render json: { services: Service.all.map(&:api_return_format) }
   end
 
   # POST /api/services

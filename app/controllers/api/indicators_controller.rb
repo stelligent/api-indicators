@@ -1,4 +1,4 @@
-class Api::IndicatorsController < ApplicationController
+class Api::IndicatorsController < ApiController
   # GET /api/indicators
   def index
     @indicators = Indicator.all.map(&:api_return_format)

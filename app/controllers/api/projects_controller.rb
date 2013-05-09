@@ -1,5 +1,4 @@
-class Api::ProjectsController < ApplicationController
-  skip_before_filter :verify_authenticity_token
+class Api::ProjectsController < ApiController
   before_filter :get_project, only: [ :show, :update, :destroy ]
   before_filter :restrict_api_access, except: [ :index, :show ]
 

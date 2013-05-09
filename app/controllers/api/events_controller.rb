@@ -1,5 +1,4 @@
-class Api::EventsController < ApplicationController
-  skip_before_filter :verify_authenticity_token
+class Api::EventsController < ApiController
   before_filter :get_events
   before_filter :get_event, only: [ :show, :update, :destroy ]
   before_filter :restrict_api_access, except: [ :index, :show ]

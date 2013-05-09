@@ -6,7 +6,7 @@
       </th>
       <% @services.each do |service| %>
       <th style="vertical-align: middle; text-align: center;">
-        <%= service.name %>
+        <span title="<%= service.description %>"><%= service.name %></span>
       </th>
       <% end %>
     </tr>
@@ -15,7 +15,7 @@
     <% @projects.each do |project| %>
     <tr>
       <th style="vertical-align: middle; text-align: right;">
-        <%= project.name %>
+        <span title="<%= project.description %>"><%= project.name %></span>
       </th>
       <% @services.each do |service| %>
       <td style="text-align: center;">

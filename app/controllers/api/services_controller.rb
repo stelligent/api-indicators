@@ -3,7 +3,7 @@ class Api::ServicesController < ApiController
 
   # GET /api/services
   def index
-    render json: { services: Service.all.map(&:api_return_format) }
+    render json: Service.all.map(&:api_return_format)
   end
 
   # POST /api/services

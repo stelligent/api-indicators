@@ -1,7 +1,7 @@
 class Api::IndicatorsController < ApiController
   # GET /api/indicators
   def index
-    render json: { indicators: Indicator.all.map(&:api_return_format) }
+    render json: Indicator.all.map(&:api_return_format)
   end
 
   # GET /api/indicators/:id

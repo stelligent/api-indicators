@@ -4,7 +4,7 @@ class Api::EventsController < ApiController
 
   # GET /api/indicators/:indicator_id/events
   def index
-    render json: { events: @events.map(&:api_return_format) }
+    render json: @events.map(&:api_return_format)
   end
 
   # POST /api/indicators/:indicator_id/events

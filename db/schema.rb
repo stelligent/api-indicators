@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130507114519) do
+ActiveRecord::Schema.define(:version => 20130509125524) do
 
   create_table "events", :force => true do |t|
     t.integer  "indicator_id"
@@ -27,14 +27,18 @@ ActiveRecord::Schema.define(:version => 20130507114519) do
     t.boolean "has_page",   :default => true
   end
 
+  add_index "indicators", ["project_id", "service_id"], :name => "index_indicators_on_project_id_and_service_id", :unique => true
+
   create_table "projects", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.string   "description"
   end
 
   create_table "services", :force => true do |t|
     t.string "name"
+    t.string "description"
   end
 
   create_table "statuses", :force => true do |t|

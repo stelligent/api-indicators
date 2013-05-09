@@ -3,8 +3,7 @@ class Api::ProjectsController < ApiController
 
   # GET /api/projects
   def index
-    @projects = Project.all.map(&:api_return_format)
-    render json: @projects
+    render json: { projects: Project.all.map(&:api_return_format) }
   end
 
   # POST /api/projects

@@ -1,4 +1,9 @@
 class IndicatorsController < ApplicationController
+  def index
+    @projects = Project.all
+    @services = Service.all
+  end
+
   def show
     begin
       @indicator = Indicator.find(params[:id])

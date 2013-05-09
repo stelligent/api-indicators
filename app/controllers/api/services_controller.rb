@@ -1,6 +1,5 @@
 class Api::ServicesController < ApiController
   before_filter :get_service, only: [ :show, :update, :destroy ]
-  before_filter :restrict_api_access, except: [ :index, :show ]
 
   # GET /api/services
   def index

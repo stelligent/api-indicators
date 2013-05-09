@@ -1,6 +1,5 @@
 class Api::ProjectsController < ApiController
   before_filter :get_project, only: [ :show, :update, :destroy ]
-  before_filter :restrict_api_access, except: [ :index, :show ]
 
   # GET /api/projects
   def index

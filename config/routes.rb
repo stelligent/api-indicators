@@ -20,8 +20,9 @@ ApiIndicators::Application.routes.draw do
 
   controller :pages do
     get "docs" => :docs
-    root to: :root
   end
+
+  root to: "indicators#index"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

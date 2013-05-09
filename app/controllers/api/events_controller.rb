@@ -1,7 +1,6 @@
 class Api::EventsController < ApiController
   before_filter :get_events
   before_filter :get_event, only: [ :show, :update, :destroy ]
-  before_filter :restrict_api_access, except: [ :index, :show ]
 
   # GET /api/indicators/:indicator_id/events
   def index

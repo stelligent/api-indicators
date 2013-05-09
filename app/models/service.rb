@@ -2,6 +2,7 @@ class Service < ActiveRecord::Base
   attr_accessible :name, :description
 
   has_many :indicators, dependent: :destroy
+  has_many :events, through: :indicators
 
   validates :name, presence: true, uniqueness: true
 

@@ -37,7 +37,8 @@ class Indicator < ActiveRecord::Base
     {
       id: self.id,
       project: self.project.api_return_format,
-      service: self.service.api_return_format
+      service: self.service.api_return_format,
+      current_event: self.current_state
     }
   end
 

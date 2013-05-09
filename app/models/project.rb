@@ -1,5 +1,5 @@
 class Project < ActiveRecord::Base
-  attr_accessible :name
+  attr_accessible :name, :description
 
   has_many :indicators, dependent: :destroy
 
@@ -10,7 +10,8 @@ class Project < ActiveRecord::Base
   def api_return_format
     {
       id: self.id,
-      name: self.name
+      name: self.name,
+      description: self.description || ""
     }
   end
 

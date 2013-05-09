@@ -20,7 +20,6 @@ end
 
 gem 'jquery-rails'
 gem 'bcrypt-ruby'
-gem 'google-code-prettify-rails'
 
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'

@@ -43,7 +43,7 @@ class Api::EventsController < ApiController
   private
 
   def get_events
-    @events ||= Indicator.find(params[:indicator_id]).events rescue render(json: {error: "No such indicator"}) and return
+    @events ||= Indicator.find(params[:indicator_id]).events.includes(:status) rescue render(json: {error: "No such indicator"}) and return
   end
 
   def get_event

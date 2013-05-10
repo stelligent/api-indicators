@@ -1,10 +1,10 @@
-<% if @projects.present? and @services.present? %>
+<% if @services.present? and @indicator_groups.present? %>
 <table class="table table-hover" style="width: auto;">
   <thead>
     <tr>
       <th>
       </th>
-      <% @services.each do |service| %>
+      <% @services.sort.each do |service| %>
       <th style="vertical-align: middle; text-align: center;">
         <span title="<%= service.description %>"><%= service.name %></span>
       </th>
@@ -12,18 +12,20 @@
     </tr>
   </thead>
   <tbody>
-    <% @projects.each do |project| %>
+    <% @indicator_groups.each do |indicator_group| %>
     <tr>
       <th style="vertical-align: middle; text-align: right;">
-        <span title="<%= project.description %>"><%= project.name %></span>
+        <span title="<%= indicator_group[0].description %>"><%= indicator_group[0].name %></span>
       </th>
-      <% @services.each do |service| %>
+      <% indicator_group[1].sort_by(&:service_id).each do |indicator| %>
       <td style="text-align: center;">
-        <%= status_button project.indicators.find_by_service_id(service.id) %>
+        <%= status_button indicator %>
       </td>
       <% end %>
     </tr>
     <% end %>
   </tbody>
 </table>
+<% else %>
+<h1>Nothing to show</h1>
 <% end %>

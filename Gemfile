@@ -18,6 +18,10 @@ group :assets do
   gem 'bootstrap-sass'
 end
 
+group :test, :development do
+  gem 'rspec-rails'
+end
+
 gem 'jquery-rails'
 gem 'bcrypt-ruby'
 

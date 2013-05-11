@@ -81,6 +81,13 @@ puts post "/indicators/#{indicator[:id]}/events", event: {
   status_id: status[:id]
 }
 
+puts "\tSetting status back to green"
+status = statuses.select { |i| i[:name] == "green" }.first
+puts post "/indicators/#{indicator[:id]}/events", event: {
+  message: "back to normal",
+  status_id: status[:id]
+}
+
 puts "\tListing indicator's history"
 puts get "/indicators/#{indicator[:id]}/events"
 

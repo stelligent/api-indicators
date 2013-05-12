@@ -1,17 +1,25 @@
 class Api::IndicatorsController < ApiController
+  before_filter :get_indicator, only: [ :show, :update ]
+
   # GET /api/indicators
   def index
-    render json: Indicator.includes(:project, :service, :events).all.map(&:api_return_format)
+    respond_with Indicator.includes(:project, :service, :events).all.map(&:api_return_format)
   end
 
   # GET /api/indicators/:id
   def show
-    begin
-      @indicator = Indicator.find(params[:id])
-    rescue
-      render(json: { error: "No such indicator" }) and return
-    end
+    respond_with @indicator
+  end
 
-    render json: @indicator.api_return_format
+  # PUT /api/indicators/:id
+  def update
+    @indicator.update_attributes(params[:indicator])
+    respond_with @indicator
+  end
+
+private
+
+  def get_indicator
+    @indicator ||= Indicator.find(params[:id]) rescue render(nothing: true) and return
   end
 end

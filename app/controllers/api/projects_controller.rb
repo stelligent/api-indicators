@@ -3,45 +3,36 @@ class Api::ProjectsController < ApiController
 
   # GET /api/projects
   def index
-    render json: Project.all.map(&:api_return_format)
+    respond_with Project.all.map(&:api_return_format)
   end
 
   # POST /api/projects
   def create
     @project = Project.new(params[:project])
-    if @project.save
-      render json: @project.api_return_format
-    else
-      render json: @project.errors
-    end
+    @project.save
+    respond_with @project
   end
 
   # GET /api/projects/:id
   def show
-    render json: @project.api_return_format
+    respond_with @project
   end
 
   # PUT /api/projects/:id
   def update
-    if @project.update_attributes(params[:project])
-      render json: @project.api_return_format
-    else
-      render json: @project.errors
-    end
+    @project.update_attributes(params[:project])
+    respond_with @project
   end
 
   # DELETE /api/projects/:id
   def destroy
-    if @project.destroy
-      render json: @project.api_return_format
-    else
-      render json: @project.errors
-    end
+    @project.destroy
+    respond_with @project
   end
 
-  private
+private
 
   def get_project
-    @project = Project.find(params[:id]) rescue render(json: { error: "No such project" }) and return
+    @project ||= Project.find(params[:id]) rescue render(nothing: true) and return
   end
 end

@@ -2,7 +2,7 @@ ApiIndicators::Application.routes.draw do
   namespace :api, defaults: { format: :json } do
     resources :projects, only: [ :index, :create, :show, :update, :destroy ]
     resources :services, only: [ :index, :create, :show, :update, :destroy ]
-    resources :indicators, only: [ :index, :show ] do
+    resources :indicators, only: [ :index, :show, :update ] do
       resources :events, only: [ :index, :create, :show, :update, :destroy ]
     end
     resources :statuses, only: [ :index ]

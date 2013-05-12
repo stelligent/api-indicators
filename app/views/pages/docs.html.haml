@@ -1,0 +1,60 @@
+- title "Documentation"
+
+.row
+  .span9
+    %h1 API Documentation
+    = render partial: "projects_docs"
+    = render partial: "services_docs"
+    = render partial: "indicators_docs"
+    = render partial: "events_docs"
+    = render partial: "statuses_docs"
+  .span3
+    .well.well-small
+      %ul.nav.nav-list
+        %li.nav-header Projects
+        %li
+          %a{href:"#projects-list"} List
+        %li
+          %a{href:"#projects-get"} Get
+        %li
+          %a{href:"#projects-create"} Create
+        %li
+          %a{href:"#projects-update"} Update
+        %li
+          %a{href:"#projects-delete"} Delete
+
+        %li.nav-header Services
+        %li
+          %a{href:"#services-list"} List
+        %li
+          %a{href:"#services-get"} Get
+        %li
+          %a{href:"#services-create"} Create
+        %li
+          %a{href:"#services-update"} Update
+        %li
+          %a{href:"#services-delete"} Delete
+
+        %li.nav-header Indicators
+        %li
+          %a{href:"#indicators-list"} List
+        %li
+          %a{href:"#indicators-get"} Get
+        %li
+          %a{href:"#indicators-update"} Update
+
+        %li.nav-header Events
+        %li
+          %a{href:"#events-list"} List
+        %li
+          %a{href:"#events-get"} Get
+        %li
+          %a{href:"#events-create"} Create
+        %li
+          %a{href:"#events-update"} Update
+        %li
+          %a{href:"#events-delete"} Delete
+
+        %li.nav-header Statuses
+        %li
+          %a{href:"#statuses-list"} List

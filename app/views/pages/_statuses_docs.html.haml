@@ -1,0 +1,34 @@
+%section#statuses
+  %h2.page-header Statuses
+  %h4 Resource
+  %table.table.table-auto
+    %thead
+      %tr
+        %th Property
+        %th Description
+    %tbody
+      %tr
+        %td id
+        %td The unique identifier by which to identify the status
+      %tr
+        %td name
+        %td The name of the status
+
+  %a{name:"statuses-list"}
+  %h3 List
+  %p Returns all statuses.
+
+  %h4 Request
+  = api_request_code "statuses", "get"
+
+  %h4 Response
+  %pre.prettyprint
+    = preserve do
+      :escaped
+        [
+          {
+            "id": {integer},
+            "name": {string}
+          },
+          ...
+        ]

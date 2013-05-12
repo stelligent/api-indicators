@@ -1,0 +1,17 @@
+- if @services.present? and @indicator_groups.present?
+  %table.table{style:"width: auto;"}
+    %thead
+      %tr
+        %th
+        - @services.sort.each do |service|
+          %th{style:"vertical-align: middle; text-align: center;"}
+            %span{title: service.description}= service.name
+    %tbody
+      - @indicator_groups.each do |indicator_group|
+        %tr
+          %th{style:"vertical-align: middle; text-align: right;"}
+            %span{title: indicator_group[0].description}= indicator_group[0].name
+          - indicator_group[1].sort_by(&:service_id).each do |indicator|
+            %td{style:"text-align: center;"}= status_button indicator
+- else
+  %h1 Nothing to show

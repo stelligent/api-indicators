@@ -1,0 +1,28 @@
+!!!
+%html
+  %head
+    %title
+      = content_for?(:title) ? "Status | #{yield :title}" : "Status"
+    /[if lt IE 9]
+      %script{src:"http://html5shim.googlecode.com/svn/trunk/html5.js", type:"text/javascript"}
+    = stylesheet_link_tag "application", media: "all"
+    = javascript_include_tag "application"
+    = javascript_include_tag "//google-code-prettify.googlecode.com/svn/loader/run_prettify.js"
+    = csrf_meta_tags
+  %body>
+    %header.navbar.navbar-inverse.navbar-static-top
+      .navbar-inner
+        .container
+          = link_to "Status", root_path, class: "brand"
+          %nav.nav-collapse.collapse
+            %ul.nav.pull-right
+              - unless current_user
+                %li= link_to "Log in", login_path
+              - else
+                %li= link_to "Profile", profile_path
+                %li= link_to "API", docs_path
+                %li= link_to "Log out", logout_path
+    .container{style:"margin: 20px auto;"}= yield
+    %footer.footer
+      .container
+        %span Status app

@@ -3,11 +3,8 @@
 .row
   .span9
     %h1 API Documentation
-    = render partial: "projects_docs"
-    = render partial: "services_docs"
-    = render partial: "indicators_docs"
-    = render partial: "events_docs"
-    = render partial: "statuses_docs"
+    - %w{projects services indicators events statuses}.each do |section|
+      = render partial: "#{section}_docs"
   .span3
     .well.well-small
       %ul.nav.nav-list

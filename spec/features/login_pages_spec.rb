@@ -36,6 +36,12 @@ describe "Login pages" do
       it { should have_link "Log out", href: logout_path }
       it { should have_link "Edit", href: edit_profile_path }
 
+      describe "docs page" do
+        before { click_link "API" }
+
+        it { should have_selector "h1", "API Documentation" }
+      end
+
       describe "log out" do
         before { click_link "Log out" }
         it { should have_link "Log in" }

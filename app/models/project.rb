@@ -16,7 +16,7 @@ class Project < ActiveRecord::Base
     }
   end
 
-  private
+private
 
   # Used in after_create callback.
   # Creates indicators of each service for newly created project.

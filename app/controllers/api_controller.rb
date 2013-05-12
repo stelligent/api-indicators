@@ -22,7 +22,7 @@ private
   end
 
   def respond_with_errors errors
-    render json: { errors: response }, status: 400
+    render json: { errors: errors }, status: 400
   end
 
   def restrict_api_access

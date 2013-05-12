@@ -1,40 +1,46 @@
 require 'spec_helper'
 
-describe Api::ProjectsController do
-  before { @project = Project.find_or_create_by_name(SecureRandom.hex) }
+describe Api::EventsController do
+  before do
+    @service = Service.find_or_create_by_name(SecureRandom.hex)
+    @project = Project.find_or_create_by_name(SecureRandom.hex)
+    @indicator = @service.indicators.find_by_project_id(@project.id)
+    @status = Status.find_by_name("red")
+    @event = @indicator.events.create(status_id: @status.id, message: SecureRandom.hex)
+  end
 
   describe "unauthorized" do
     describe "GET #index" do
-      it "returns all projects" do
-        get :index
+      it "returns all events" do
+        get :index, indicator_id: @indicator.id
         response.should be_success
       end
     end
 
     describe "GET #show" do
-      it "returns one project" do
-        get :show, id: @project.id
+      it "returns one event" do
+        get :show, indicator_id: @indicator.id, id: @event.id
         response.should be_success
       end
     end
 
     describe "POST #create" do
       it "returns an error" do
-        post :create
+        post :create, indicator_id: @indicator.id
         response.should_not be_success
       end
     end
 
     describe "PUT #update" do
       it "returns an error" do
-        put :update, id: @project.id
+        put :update, indicator_id: @indicator.id, id: @event.id
         response.should_not be_success
       end
     end
 
     describe "DELETE #destroy" do
       it "returns an error" do
-        delete :destroy, id: @project.id
+        delete :destroy, indicator_id: @indicator.id, id: @event.id
         response.should_not be_success
       end
     end
@@ -46,13 +52,13 @@ describe Api::ProjectsController do
     describe "POST #create" do
       context "with invalid params" do
         it "returns an error" do
-          post :create, project: { name: "" }
+          post :create, indicator_id: @indicator.id, event: { status_id: nil, message: SecureRandom.hex }
           response.should_not be_success
         end
       end
       context "with valid params" do
-        it "creates and returns a project" do
-          post :create, project: { name: SecureRandom.hex }
+        it "creates and returns an event" do
+          post :create, indicator_id: @indicator.id, event: { status_id: @status.id, message: SecureRandom.hex }
           response.should be_success
         end
       end
@@ -61,21 +67,21 @@ describe Api::ProjectsController do
     describe "PUT #update" do
       context "with invalid params" do
         it "returns an error" do
-          put :update, id: @project.id, project: { name: "" }
+          put :update, indicator_id: @indicator.id, id: @event.id, event: { status_id: nil, message: SecureRandom.hex }
           response.should_not be_success
         end
       end
       context "with valid params" do
-        it "updates and returns a project" do
-          put :update, id: @project.id, project: { name: SecureRandom.hex }
+        it "updates and returns an event" do
+          put :update, indicator_id: @indicator.id, id: @event.id, event: { status_id: @status.id, message: SecureRandom.hex }
           response.should be_success
         end
       end
     end
 
     describe "DELETE #destroy" do
-      it "destroys and returns a project" do
-        delete :destroy, id: @project.id
+      it "destroys and returns an event" do
+        delete :destroy, indicator_id: @indicator.id, id: @event.id
         response.should be_success
       end
     end

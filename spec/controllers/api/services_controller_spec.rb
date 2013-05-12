@@ -1,19 +1,19 @@
 require 'spec_helper'
 
-describe Api::ProjectsController do
-  before { @project = Project.find_or_create_by_name(SecureRandom.hex) }
+describe Api::ServicesController do
+  before { @service = Service.find_or_create_by_name(SecureRandom.hex) }
 
   describe "unauthorized" do
     describe "GET #index" do
-      it "returns all projects" do
+      it "returns all services" do
         get :index
         response.should be_success
       end
     end
 
     describe "GET #show" do
-      it "returns one project" do
-        get :show, id: @project.id
+      it "returns one service" do
+        get :show, id: @service.id
         response.should be_success
       end
     end
@@ -27,14 +27,14 @@ describe Api::ProjectsController do
 
     describe "PUT #update" do
       it "returns an error" do
-        put :update, id: @project.id
+        put :update, id: @service.id
         response.should_not be_success
       end
     end
 
     describe "DELETE #destroy" do
       it "returns an error" do
-        delete :destroy, id: @project.id
+        delete :destroy, id: @service.id
         response.should_not be_success
       end
     end
@@ -46,13 +46,13 @@ describe Api::ProjectsController do
     describe "POST #create" do
       context "with invalid params" do
         it "returns an error" do
-          post :create, project: { name: "" }
+          post :create, service: { name: "" }
           response.should_not be_success
         end
       end
       context "with valid params" do
-        it "creates and returns a project" do
-          post :create, project: { name: SecureRandom.hex }
+        it "creates and returns a service" do
+          post :create, service: { name: SecureRandom.hex }
           response.should be_success
         end
       end
@@ -61,21 +61,21 @@ describe Api::ProjectsController do
     describe "PUT #update" do
       context "with invalid params" do
         it "returns an error" do
-          put :update, id: @project.id, project: { name: "" }
+          put :update, id: @service.id, service: { name: "" }
           response.should_not be_success
         end
       end
       context "with valid params" do
-        it "updates and returns a project" do
-          put :update, id: @project.id, project: { name: SecureRandom.hex }
+        it "updates and returns a service" do
+          put :update, id: @service.id, service: { name: SecureRandom.hex }
           response.should be_success
         end
       end
     end
 
     describe "DELETE #destroy" do
-      it "destroys and returns a project" do
-        delete :destroy, id: @project.id
+      it "destroys and returns a service" do
+        delete :destroy, id: @service.id
         response.should be_success
       end
     end

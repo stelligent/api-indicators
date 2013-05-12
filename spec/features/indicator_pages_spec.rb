@@ -13,7 +13,6 @@ describe "Indicator pages" do
     before { visit root_path }
 
     it { should have_title "Status" }
-    it { should have_link "Docs" }
     it { should have_xpath "//a[contains(@href, '#{indicator_path(@indicator)}')]" }
 
     describe "when indicator doesn't have a page" do

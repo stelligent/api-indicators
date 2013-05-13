@@ -1,0 +1,21 @@
+- title "Documentation"
+
+.row
+  .span9.docs
+    %h1
+      %a{name:"top"}
+      API Documentation
+    %i.icon-warning-sign
+    sign means that the method requires authentication
+    - @resources.each do |resource|
+      = render partial: resource[0]
+  .span3
+    .well.well-small
+      %ul.nav.nav-list
+        - @resources.each do |resource|
+          %li.nav-header= resource[0].titleize
+          - resource[1].each do |action|
+            %li
+              %a{href:"##{resource[0]}-#{action}"}
+                = action.titleize
+                = '<i class="icon-warning-sign pull-right" title="This method requires authentication"></i>'.html_safe if %w{create update delete}.include? action

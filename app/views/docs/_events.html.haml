@@ -1,0 +1,156 @@
+%section#events
+  %h2.page-header
+    Events
+    %a{href:"#top"} &uarr;
+  %h4 Resource
+  %table.table.table-auto.table-condensed
+    %thead
+      %tr
+        %th Property
+        %th Description
+    %tbody
+      %tr
+        %td id
+        %td The unique identifier of the event
+      %tr
+        %td time
+        %td The time of the event
+      %tr
+        %td status.id
+        %td The unique identifier of event's status
+      %tr
+        %td status.name
+        %td The name of event's status
+      %tr
+        %td message
+        %td The message explaining the event
+
+  %a{name:"events-list"}
+  %h3 List
+  %p Returns a list of events.
+
+  %h4 Request
+  = api_request_code "indicators/{indicator_id}/events", "get"
+
+  %h4 Response
+  %pre.prettyprint
+    = preserve do
+      :escaped
+        [
+          {
+            "id": {integer},
+            "time": {datetime},
+            "status": {
+              "id": {integer},
+              "name": {string}
+            },
+            "message": {string}
+          },
+          ...
+        ]
+
+  %a{name:"events-get"}
+  %h3 Get
+  %p Returns a specified event.
+
+  %h4 Request
+  = api_request_code "indicators/{indicator_id}/events/{id}", "get"
+
+  %h4 Response
+  %pre.prettyprint
+    = preserve do
+      :escaped
+        {
+          "id": {integer},
+          "time": {datetime},
+          "status": {
+            "id": {integer},
+            "name": {string}
+          },
+          "message": {string}
+        }
+
+  %a{name:"events-create"}
+  %h3
+    Create
+    %i.icon-warning-sign
+  %p Creates and returns a event.
+
+  %h4 Request
+  = api_request_code "indicators/{indicator_id}/events", "post"
+  %h5 Body
+  %pre.prettyprint
+    = preserve do
+      :escaped
+        {
+          "status_id": {integer},
+          "message": {string}
+        }
+
+  %h4 Response
+  %pre.prettyprint
+    = preserve do
+      :escaped
+        {
+          "id": {integer},
+          "time": {datetime},
+          "status": {
+            "id": {integer},
+            "name": {string}
+          },
+          "message": {string}
+        }
+
+  %a{name:"events-update"}
+  %h3
+    Update
+    %i.icon-warning-sign
+  %p Updates and returns a event.
+
+  %h4 Request
+  = api_request_code "indicators/{indicator_id}/events/{id}", "put"
+  %h5 Body
+  %pre.prettyprint
+    = preserve do
+      :escaped
+        {
+          "status_id": {integer},
+          "message": {string}
+        }
+
+  %h4 Response
+  %pre.prettyprint
+    = preserve do
+      :escaped
+        {
+          "id": {integer},
+          "time": {datetime},
+          "status": {
+            "id": {integer},
+            "name": {string}
+          },
+          "message": {string}
+        }
+
+  %a{name:"events-delete"}
+  %h3
+    Delete
+    %i.icon-warning-sign
+  %p Deletes and returns a event.
+
+  %h4 Request
+  = api_request_code "indicators/{indicator_id}/events/{id}", "delete"
+
+  %h4 Response
+  %pre.prettyprint
+    = preserve do
+      :escaped
+        {
+          "id": {integer},
+          "time": {datetime},
+          "status": {
+            "id": {integer},
+            "name": {string}
+          },
+          "message": {string}
+        }

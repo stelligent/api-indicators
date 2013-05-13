@@ -1,0 +1,130 @@
+%section#projects
+  %h2.page-header
+    Projects
+    %a{href:"#top"} &uarr;
+  %h4 Resource
+  %table.table.table-auto.table-condensed
+    %thead
+      %tr
+        %th Property
+        %th Description
+    %tbody
+      %tr
+        %td id
+        %td The unique identifier by which to identify the project
+      %tr
+        %td name
+        %td The name of the project
+      %tr
+        %td description
+        %td The description of the project
+
+  %a{name:"projects-list"}
+  %h3 List
+  %p Returns a list of projects.
+
+  %h4 Request
+  = api_request_code "projects", "get"
+
+  %h4 Response
+  %pre.prettyprint
+    = preserve do
+      :escaped
+        [
+          {
+            "id": {integer},
+            "name": {string},
+            "description": {string}
+          },
+          ...
+        ]
+
+  %a{name:"projects-get"}
+  %h3 Get
+  %p Returns a specified project.
+
+  %h4 Request
+  = api_request_code "projects/{id}", "get"
+
+  %h4 Response
+  %pre.prettyprint
+    = preserve do
+      :escaped
+        {
+          "id": {integer},
+          "name": {string},
+          "description": {string}
+        }
+
+  %a{name:"projects-create"}
+  %h3
+    Create
+    %i.icon-warning-sign
+  %p Creates and returns a project.
+
+  %h4 Request
+  = api_request_code "projects", "post"
+  %h5 Body
+  %pre.prettyprint
+    = preserve do
+      :escaped
+        {
+          "name": {string},
+          "description": {string}
+        }
+
+  %h4 Response
+  %pre.prettyprint
+    = preserve do
+      :escaped
+        {
+          "id": {integer},
+          "name": {string},
+          "description": {string}
+        }
+
+  %a{name:"projects-update"}
+  %h3
+    Update
+    %i.icon-warning-sign
+  %p Updates and returns a project.
+
+  %h4 Request
+  = api_request_code "projects/{id}", "put"
+  %h5 Body
+  %pre.prettyprint
+    = preserve do
+      :escaped
+        {
+          "name": {string},
+          "description": {string}
+        }
+
+  %h4 Response
+  %pre.prettyprint
+    = preserve do
+      :escaped
+        {
+          "id": {integer},
+          "name": {string},
+          "description": {string}
+        }
+
+  %a{name:"projects-delete"}
+  %h3
+    Delete
+    %i.icon-warning-sign
+  %p Deletes and returns a project.
+
+  %h4 Request
+  = api_request_code "projects/{id}", "delete"
+
+  %h4 Response
+  %pre.prettyprint
+    = preserve do
+      :escaped
+        {
+          "id": {integer},
+          "name": {string},
+          "description": {string}
+        }

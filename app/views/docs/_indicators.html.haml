@@ -1,0 +1,169 @@
+%section#indicators
+  %h2.page-header
+    Indicators
+    %a{href:"#top"} &uarr;
+  %h4 Resource
+  %table.table.table-auto.table-condensed
+    %thead
+      %tr
+        %th Property
+        %th Description
+    %tbody
+      %tr
+        %td id
+        %td The unique identifier by which to identify an indicator
+      %tr
+        %td project.id
+        %td The unique identifier of the project
+      %tr
+        %td project.name
+        %td The name of the project
+      %tr
+        %td project.description
+        %td The description of the project
+      %tr
+        %td service.id
+        %td The unique identifier of the service
+      %tr
+        %td service.name
+        %td The name of the service
+      %tr
+        %td service.description
+        %td The description of the service
+      %tr
+        %td current_event.id
+        %td The unique identifier of current event
+      %tr
+        %td current_event.time
+        %td The time of current event
+      %tr
+        %td current_event.status.id
+        %td The unique identifier of current event's status
+      %tr
+        %td current_event.status.name
+        %td The name of current event's status
+      %tr
+        %td current_event.message
+        %td The message explaining current event
+      %tr
+        %td has_page
+        %td Whether or not the indicator has its own page
+
+  %a{name:"indicators-list"}
+  %h3 List
+  %p Returns a list of indicators.
+
+  %h4 Request
+  = api_request_code "indicators", "get"
+
+  %h4 Response
+  %pre.prettyprint
+    = preserve do
+      :escaped
+        [
+          {
+            "id": {integer},
+            "project": {
+              "id": {integer},
+              "name": {string},
+              "description": {string}
+            },
+            "service": {
+              "id": {integer},
+              "name": {string},
+              "description": {string}
+            },
+            "current_event": {
+              "id": {integer},
+              "time": {datetime},
+              "status": {
+                "id": {integer},
+                "name": {string}
+              },
+              "message": {string}
+            },
+            "has_page": {boolean}
+          },
+          ...
+        ]
+
+  %a{name:"indicators-get"}
+  %h3 Get
+  %p Returns a specified indicator.
+
+  %h4 Request
+  = api_request_code "indicators/{id}", "get"
+
+  %h4 Response
+  %pre.prettyprint
+    = preserve do
+      :escaped
+        {
+          "id": {integer},
+          "project": {
+            "id": {integer},
+            "name": {string},
+            "description": {string}
+          },
+          "service": {
+            "id": {integer},
+            "name": {string},
+            "description": {string}
+          },
+          "current_event": {
+            "id": {integer},
+            "time": {datetime},
+            "status": {
+              "id": {integer},
+              "name": {string}
+            },
+            "message": {string}
+          },
+          "has_page": {boolean}
+        }
+
+  %a{name:"indicators-update"}
+  %h3
+    Update
+    %i.icon-warning-sign
+  %p Updates and returns an indicator.
+
+  %h4 Request
+  = api_request_code "indicators/{id}", "put"
+  %h5 Body
+  %pre.prettyprint
+    = preserve do
+      :escaped
+        {
+          "indicator": {
+            "has_page": {boolean}
+          }
+        }
+
+  %h4 Response
+  %pre.prettyprint
+    = preserve do
+      :escaped
+        {
+          "id": {integer},
+          "project": {
+            "id": {integer},
+            "name": {string},
+            "description": {string}
+          },
+          "service": {
+            "id": {integer},
+            "name": {string},
+            "description": {string}
+          },
+          "current_event": {
+            "id": {integer},
+            "time": {datetime},
+            "status": {
+              "id": {integer},
+              "name": {string}
+            },
+            "message": {string}
+          },
+          "has_page": {boolean}
+        }

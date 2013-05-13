@@ -1,0 +1,130 @@
+%section#services
+  %h2.page-header
+    Services
+    %a{href:"#top"} &uarr;
+  %h4 Resource
+  %table.table.table-auto.table-condensed
+    %thead
+      %tr
+        %th Property
+        %th Description
+    %tbody
+      %tr
+        %td id
+        %td The unique identifier by which to identify the service
+      %tr
+        %td name
+        %td The name of the service
+      %tr
+        %td description
+        %td The description of the service
+
+  %a{name:"services-list"}
+  %h3 List
+  %p Returns a list of services.
+
+  %h4 Request
+  = api_request_code "services", "get"
+
+  %h4 Response
+  %pre.prettyprint
+    = preserve do
+      :escaped
+        [
+          {
+            "id": {integer},
+            "name": {string},
+            "description": {string}
+          },
+          ...
+        ]
+
+  %a{name:"services-get"}
+  %h3 Get
+  %p Returns a specified service.
+
+  %h4 Request
+  = api_request_code "services/{id}", "get"
+
+  %h4 Response
+  %pre.prettyprint
+    = preserve do
+      :escaped
+        {
+          "id": {integer},
+          "name": {string},
+          "description": {string}
+        }
+
+  %a{name:"services-create"}
+  %h3
+    Create
+    %i.icon-warning-sign
+  %p Creates and returns a service.
+
+  %h4 Request
+  = api_request_code "services", "post"
+  %h5 Body
+  %pre.prettyprint
+    = preserve do
+      :escaped
+        {
+          "name": {string},
+          "description": {string}
+        }
+
+  %h4 Response
+  %pre.prettyprint
+    = preserve do
+      :escaped
+        {
+          "id": {integer},
+          "name": {string},
+          "description": {string}
+        }
+
+  %a{name:"services-update"}
+  %h3
+    Update
+    %i.icon-warning-sign
+  %p Updates and returns a service.
+
+  %h4 Request
+  = api_request_code "services/{id}", "put"
+  %h5 Body
+  %pre.prettyprint
+    = preserve do
+      :escaped
+        {
+          "name": {string},
+          "description": {string}
+        }
+
+  %h4 Response
+  %pre.prettyprint
+    = preserve do
+      :escaped
+        {
+          "id": {integer},
+          "name": {string},
+          "description": {string}
+        }
+
+  %a{name:"services-delete"}
+  %h3
+    Delete
+    %i.icon-warning-sign
+  %p Deletes and returns a service.
+
+  %h4 Request
+  = api_request_code "services/{id}", "delete"
+
+  %h4 Response
+  %pre.prettyprint
+    = preserve do
+      :escaped
+        {
+          "id": {integer},
+          "name": {string},
+          "description": {string}
+        }

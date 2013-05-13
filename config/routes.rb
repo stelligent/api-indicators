@@ -6,6 +6,7 @@ ApiIndicators::Application.routes.draw do
       resources :events, only: [ :index, :create, :show, :update, :destroy ]
     end
     resources :statuses, only: [ :index ]
+    root to: "api#stats"
   end
 
   resources :indicators, only: [ :show ]
@@ -18,9 +19,7 @@ ApiIndicators::Application.routes.draw do
 
   resource :profile, controller: :users, only: [ :show, :edit, :update ]
 
-  controller :pages do
-    get "docs" => :docs
-  end
+  resource :docs, only: [ :show ]
 
   root to: "indicators#index"
 

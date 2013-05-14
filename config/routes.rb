@@ -6,8 +6,9 @@ ApiIndicators::Application.routes.draw do
       resources :events, only: [ :index, :create, :show, :update, :destroy ]
     end
     resources :statuses, only: [ :index ]
-    root to: "api#stats"
   end
+
+  get "/api" => "api#show", as: "api_root"
 
   resources :indicators, only: [ :show ]
 

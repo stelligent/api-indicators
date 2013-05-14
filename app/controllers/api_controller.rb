@@ -2,6 +2,13 @@ class ApiController < ApplicationController
   skip_before_filter :verify_authenticity_token
   before_filter :restrict_api_access, except: [ :index, :show ]
 
+  def show
+    response = { server_time: Time.now.to_i, ok: 1 }
+    respond_ok response
+  end
+
+private
+
   def respond_with response
     if response.respond_to?(:errors) and response.errors.present?
       respond_with_errors response.errors.full_messages

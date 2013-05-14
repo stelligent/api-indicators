@@ -14,6 +14,7 @@ describe "Indicator pages" do
 
     it { should have_title "Status" }
     it { should have_xpath "//a[contains(@href, '#{indicator_path(@indicator)}')]" }
+    it { should have_xpath "//img[@title='stelligent']" }
 
     describe "when indicator doesn't have a page" do
       before do

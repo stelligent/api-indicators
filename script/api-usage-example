@@ -1,9 +1,10 @@
 #!/usr/bin/env ruby
 require 'net/http'
 require 'json'
+require 'securerandom'
 
 API_URL = URI.parse("http://localhost:3000/api")
-API_KEY = "7a660a30b42ab82f8c3748a154a07ecc"
+API_KEY = "set_me"
 
 def get url
   request = Net::HTTP::Get.new(API_URL.path + url)
@@ -46,6 +47,11 @@ def delete url
   JSON.parse(result.body, symbolize_names: true)
 end
 
+raise(StandardError, "Set the API_KEY") if API_KEY == "set_me"
+
+puts "\tAPI server status"
+puts server = get("") rescue raise(StandardError, "API doesn't respond, change API_URL (currently #{API_URL})")
+
 puts "\tListing projects"
 puts get "/projects"
 
@@ -53,17 +59,16 @@ puts "\tListing services"
 puts get "/services"
 
 puts "\tCreating new project (returns created project)"
-puts project = post("/projects", { project: { name: "Usage example project" } })
-raise StandardError unless project[:id]
+puts project = post("/projects", { project: { name: SecureRandom.hex } })
 
 puts "\tUpdating this project (returns updated project)"
-puts put "/projects/#{project[:id]}", { project: { name: "Usage example project renamed" } }
+puts put "/projects/#{project[:id]}", { project: { name: SecureRandom.hex } }
 
 puts "\tCreating new service (returns created service)"
-puts service = post("/services", { service: { name: "Redis" } })
+puts service = post("/services", { service: { name: SecureRandom.hex } })
 
 puts "\tUpdating this service (returns updated service)"
-puts put "/services/#{service[:id]}", { service: { name: "MongoDB" } }
+puts put "/services/#{service[:id]}", { service: { name: SecureRandom.hex } }
 
 puts "\tListing indicators"
 puts indicators = get("/indicators")

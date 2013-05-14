@@ -3,7 +3,7 @@ class ApiController < ApplicationController
   before_filter :restrict_api_access, except: [ :index, :show ]
 
   def show
-    response = { server_time: Time.now.to_i, ok: 1 }
+    response = { server_time: Time.now.to_i, ok: true }
     respond_ok response
   end
 

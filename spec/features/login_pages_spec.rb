@@ -40,7 +40,7 @@ describe "Login pages" do
         before { click_link "API" }
 
         it { should have_title "Status | Documentation" }
-        it { should have_selector "h1", "API Documentation" }
+        it { should have_selector "h1", "REST API Documentation" }
       end
 
       describe "log out" do

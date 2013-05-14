@@ -4,9 +4,16 @@
   .span9.docs
     %h1
       %a{name:"top"}
-      API Documentation
-    %i.icon-warning-sign
-    sign means that the method requires authentication
+      REST API Documentation
+    %p
+      Every method accepts requests with body in JSON format. Relevant HTTP header is
+      %code Content-Type: application/json
+    %p
+      %i.icon-warning-sign
+      symbol near method's name in this documentation means that method requires token authentication with HTTP header, e.g.
+      %code Authorization: Token token="<api_key>"
+      (replace <api_key> with your own API key)
+
     - @resources.each do |resource|
       = render partial: resource[0]
   .span3

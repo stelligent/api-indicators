@@ -18,6 +18,11 @@ footer {
   padding: 20px 0;
   border-top: 1px solid #eee;
   color: #ccc;
+  img {
+    vertical-align: top;
+    position: relative;
+    top: -1px;
+  }
   a {
     color: #ccc;
   }
@@ -39,4 +44,8 @@ code.debug_dump {
   width: 100%;
   display: block;
   white-space: normal;
+}
+
+.quiet {
+  color: #999;
 }

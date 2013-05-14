@@ -2,7 +2,6 @@
   %h2.page-header
     Services
     %a{href:"#top"} &uarr;
-  %h4 Resource
   %table.table.table-auto.table-condensed
     %thead
       %tr
@@ -18,35 +17,7 @@
       %tr
         %td description
         %td The description of the service
-
-  %a{name:"services-list"}
-  %h3 List
-  %p Returns a list of services.
-
-  %h4 Request
-  = api_request_code "services", "get"
-
-  %h4 Response
-  %pre.prettyprint
-    = preserve do
-      :escaped
-        [
-          {
-            "id": {integer},
-            "name": {string},
-            "description": {string}
-          },
-          ...
-        ]
-
-  %a{name:"services-get"}
-  %h3 Get
-  %p Returns a specified service.
-
-  %h4 Request
-  = api_request_code "services/{id}", "get"
-
-  %h4 Response
+  %h4 Instance Resource
   %pre.prettyprint
     = preserve do
       :escaped
@@ -55,13 +26,38 @@
           "name": {string},
           "description": {string}
         }
+  %h4 List Resource
+  %pre.prettyprint
+    = preserve do
+      :escaped
+        [
+          instance-resource-1,
+          instance-resource-2,
+          ...
+          instance-resource-n
+        ]
+
+  %a{name:"services-list"}
+  %h3 List
+  %p Returns a list of services.
+  %h4 Request
+  = api_request_code "services", "get"
+  %h4 Response
+  %p List Resource of services.
+
+  %a{name:"services-get"}
+  %h3 Get
+  %p Returns a specified service.
+  %h4 Request
+  = api_request_code "services/{id}", "get"
+  %h4 Response
+  %p Instance Resource of the service.
 
   %a{name:"services-create"}
   %h3
     Create
     %i.icon-warning-sign
   %p Creates and returns a service.
-
   %h4 Request
   = api_request_code "services", "post"
   %h5 Body
@@ -72,23 +68,14 @@
           "name": {string},
           "description": {string}
         }
-
   %h4 Response
-  %pre.prettyprint
-    = preserve do
-      :escaped
-        {
-          "id": {integer},
-          "name": {string},
-          "description": {string}
-        }
+  %p Instance Resource of the service.
 
   %a{name:"services-update"}
   %h3
     Update
     %i.icon-warning-sign
   %p Updates and returns a service.
-
   %h4 Request
   = api_request_code "services/{id}", "put"
   %h5 Body
@@ -99,32 +86,15 @@
           "name": {string},
           "description": {string}
         }
-
   %h4 Response
-  %pre.prettyprint
-    = preserve do
-      :escaped
-        {
-          "id": {integer},
-          "name": {string},
-          "description": {string}
-        }
+  %p Instance Resource of the service.
 
   %a{name:"services-delete"}
   %h3
     Delete
     %i.icon-warning-sign
   %p Deletes and returns a service.
-
   %h4 Request
   = api_request_code "services/{id}", "delete"
-
   %h4 Response
-  %pre.prettyprint
-    = preserve do
-      :escaped
-        {
-          "id": {integer},
-          "name": {string},
-          "description": {string}
-        }
+  %p Instance Resource of the service.

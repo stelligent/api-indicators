@@ -2,7 +2,6 @@
   %h2.page-header
     Statuses
     %a{href:"#top"} &uarr;
-  %h4 Resource
   %table.table.table-auto.table-condensed
     %thead
       %tr
@@ -15,22 +14,29 @@
       %tr
         %td name
         %td The name of the status
-
-  %a{name:"statuses-list"}
-  %h3 List
-  %p Returns all statuses.
-
-  %h4 Request
-  = api_request_code "statuses", "get"
-
-  %h4 Response
+  %h4 Instance Resource
+  %pre.prettyprint
+    = preserve do
+      :escaped
+        {
+          "id": {integer},
+          "name": {string}
+        }
+  %h4 List Resource
   %pre.prettyprint
     = preserve do
       :escaped
         [
-          {
-            "id": {integer},
-            "name": {string}
-          },
+          instance-resource-1,
+          instance-resource-2,
           ...
+          instance-resource-n,
         ]
+
+  %a{name:"statuses-list"}
+  %h3 List
+  %p Returns all statuses.
+  %h4 Request
+  = api_request_code "statuses", "get"
+  %h4 Response
+  %p List Resource of statuses.

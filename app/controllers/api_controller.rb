@@ -12,8 +12,6 @@ private
   def respond_with response
     if response.respond_to?(:errors) and response.errors.present?
       respond_with_errors response.errors.full_messages
-    elsif response.is_a? Hash
-      respond_with_errors ["#{response[:not_found].capitalize} not found"] if response[:not_found]
     elsif response.respond_to? :api_return_format
       respond_ok response.api_return_format
     else

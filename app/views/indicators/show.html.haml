@@ -8,5 +8,5 @@
       %td
         %h4 History
   %tbody
-    -@indicator.get_history.each do |event|
+    - @indicator.get_history.each do |event|
       = history_row event

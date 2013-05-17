@@ -4,7 +4,6 @@ class Indicator < ActiveRecord::Base
   belongs_to :service
   belongs_to :project
   has_many :events, dependent: :destroy
-  has_many :statuses, through: :events
 
   default_scope order(:project_id, :service_id)
 

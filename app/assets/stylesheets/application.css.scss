@@ -13,9 +13,10 @@ table.table-auto {
   width: auto;
 }
 
+// Layout: footer
 footer {
   margin-top: 20px;
-  padding: 20px 0;
+  padding: 20px;
   border-top: 1px solid #eee;
   color: #ccc;
   img {
@@ -28,8 +29,10 @@ footer {
   }
 }
 
+// Docs page
 .docs {
   section {
+    margin-top: 40px;
     h2.page-header {
       a {
         font-size: 70%;
@@ -40,6 +43,7 @@ footer {
   }
 }
 
+// Development
 code.debug_dump {
   width: 100%;
   display: block;

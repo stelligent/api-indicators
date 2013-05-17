@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 ruby '1.9.3'
 
 gem 'rails', '3.2.13'
-gem 'sqlite3'
 gem 'haml'
 gem 'jquery-rails'
 gem 'bcrypt-ruby'
@@ -14,10 +13,16 @@ group :assets do
   gem 'bootstrap-sass', '2.3.1.0'
 end
 
-group :test, :development do
-  gem 'rspec-rails'
-end
-
 group :test do
   gem 'capybara'
+end
+
+group :test, :development do
+  gem 'rspec-rails'
+  gem 'sqlite3'
+end
+
+group :production do
+  # Change this to use another DB in production
+  gem 'sqlite3'
 end

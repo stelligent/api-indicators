@@ -1,4 +1,6 @@
 class Indicator < ActiveRecord::Base
+  DISPLAYED_HISTORY_SIZE = 20
+
   attr_accessible :service_id, :project_id, :has_page
 
   belongs_to :service
@@ -23,7 +25,7 @@ class Indicator < ActiveRecord::Base
   end
 
   def get_history size = 10
-    events.limit(size)
+    events.limit size
   end
 
   def set status, message = nil

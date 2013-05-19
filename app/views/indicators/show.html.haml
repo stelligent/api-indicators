@@ -2,11 +2,14 @@
 
 %h2= @indicator.name
 
-%table.table{style:"width: auto;"}
+%table.table{style: "width: auto;"}
   %thead
     %tr
       %td
         %h4 History
   %tbody
-    - @indicator.get_history.each do |event|
+    - @indicator.get_history(Indicator::DISPLAYED_HISTORY_SIZE).each do |event|
       = history_row event
+    - if (before_history_size = @indicator.history_size - Indicator::DISPLAYED_HISTORY_SIZE) > 0
+      %tr
+        %td{colspan: 2}= "there were #{before_history_size} events before this"

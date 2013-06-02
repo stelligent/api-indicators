@@ -10,7 +10,9 @@ While Rails can be installed on many operating systems, we've include detailed i
 
 ## Installation of Rails on Ubuntu 12.04 LTS
 
-These instructions were adpated from https://www.digitalocean.com/community/articles/how-to-install-ruby-on-rails-on-ubuntu-12-04-lts-precise-pangolin-with-rvm
+You'll need to first download and install Ubuntu 12.04 LTS. To do this, go to http://releases.ubuntu.com/precise/. 
+
+After you've installed Ubunu, follow the instructions below (which were adpated from https://www.digitalocean.com/community/articles/how-to-install-ruby-on-rails-on-ubuntu-12-04-lts-precise-pangolin-with-rvm)
 
 1. ```sudo apt-get update```
 1. ```sudo apt-get install curl```

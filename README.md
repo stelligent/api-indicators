@@ -16,7 +16,7 @@ While Rails can be installed on many operating systems, we've include detailed i
 
 1. ```git clone https://github.com/stelligent/canaryboard.git```
 1. ```cd canaryboard```
-1.```bundle install```
+1. ```bundle install```
 1. ```bundle exec rake db:setup```
 1. ```bundle exec rake db:test:prepare```
 1. ```bundle exec rspec spec/```

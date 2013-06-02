@@ -36,4 +36,8 @@ After you've installed Ubunu, follow the instructions below (which were adpated 
 1. ```bundle exec rspec spec/```
 1. ```bundle exec rake db:test:prepare```
 1. ```bundle exec rspec spec/```
-1. ```rails s```
+1. ```rails s``` 
+
+## Using CanaryBoard
+
+After your CanaryBoard Rails app is up and running, you can use the example here: https://github.com/stelligent/canaryboard/blob/master/script/api-usage-example to update the status indicators for projects and services.

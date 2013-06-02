@@ -1,4 +1,4 @@
-api-indicators
+CanaryBoard
 ==============
 
 ## Description

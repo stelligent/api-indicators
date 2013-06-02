@@ -9,8 +9,18 @@ Clean installation has a superuser account with ```admin:admin``` credentials; b
 While Rails can be installed on many operating systems, we've include detailed instructions for installing on Ubuntu 12.04 LTS.
 
 ## Installation of Rails on Ubuntu 12.04 LTS
-1. ```sudo apt-get install git```
 
+1. ```sudo apt-get update```
+1. ```sudo apt-get install curl```
+1. ```\curl -L https://get.rvm.io | bash -s stable```
+1. ```source ~/.rvm/scripts/rvm```
+1. ```rvm requirements```
+1. ```rvm install 1.9.3```
+1. ```rvm use 1.9.3 --default```
+1. ```rvm rubygems current```
+1. ```gem install rails```
+1. ```sudo apt-get install nodejs```
+1. ```sudo apt-get install git```
 
 ## Installation of CanaryBoard
 

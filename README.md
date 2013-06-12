@@ -39,8 +39,6 @@ Now that you've intalled Ruby and other packages, you will install CanaryBoard o
 1. ```bundle exec rake db:setup```
 1. ```bundle exec rake db:test:prepare```
 1. ```bundle exec rspec spec/```
-1. ```bundle exec rake db:test:prepare```
-1. ```bundle exec rspec spec/```
 1. ```rails s``` 
 
 ## Using CanaryBoard

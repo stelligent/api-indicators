@@ -31,6 +31,8 @@ After you've installed Ubunu, follow the instructions below (which were adpated 
 
 ## Installation of CanaryBoard
 
+Now that you've intalled Ruby and other packages, you will install CanaryBoard on this instance.
+
 1. ```git clone https://github.com/stelligent/canaryboard.git```
 1. ```cd canaryboard```
 1. ```bundle install```

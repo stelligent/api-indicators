@@ -45,4 +45,4 @@ Now that you've intalled Ruby and other packages, you will install CanaryBoard o
 
 ## Using CanaryBoard
 
-After your CanaryBoard Rails app is up and running, you can use the example here: https://github.com/stelligent/canaryboard/blob/master/script/api-usage-example to update the status indicators for projects and services.
+After your CanaryBoard Rails app is up and running, you can use the example here: https://github.com/stelligent/canaryboard/blob/master/script/api-usage-example to update the status indicators for projects and services. For more information, you can read the [Agile DevOps: Build a DevOps dashboard](http://www.ibm.com/developerworks/agile/library/a-devops10/) from IBM developerWorks on using CanaryBoard.

@@ -16,6 +16,7 @@ You'll need to first download and install Ubuntu 12.04 LTS. To do this, go to [U
 ## Installation of Rails on Ubuntu 12.04 LTS
 
 After you've installed Ubunu, follow the instructions below (which were adpated from [digitalocean](https://www.digitalocean.com/community/articles/how-to-install-ruby-on-rails-on-ubuntu-12-04-lts-precise-pangolin-with-rvm))
+
 1. ```sudo apt-get update```
 1. ```sudo apt-get install curl```
 1. ```\curl -L https://get.rvm.io | bash -s stable```

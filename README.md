@@ -3,14 +3,14 @@ CanaryBoard
 
 ## Description
 
-This app lets you inform people about the status of services you provide and projects you're responsible for. 
+This app lets you inform people about the status of services you provide and projects you're responsible for.
 Clean installation has a superuser account with ```admin:admin``` credentials; be sure to change it after first login.
 
 While Rails can be installed on many operating systems, we've include detailed instructions for installing on Ubuntu 12.04 LTS.
 
 ## Configuration of Linux Instance
 
-You'll need to first download and install Ubuntu 12.04 LTS. To do this, go to [Ubuntu](http://releases.ubuntu.com/precise/). 
+You'll need to first download and install Ubuntu 12.04 LTS. To do this, go to [Ubuntu](http://releases.ubuntu.com/precise/).
 
 
 ## Installation of Rails on Ubuntu 12.04 LTS
@@ -28,6 +28,7 @@ After you've installed Ubunu, follow the instructions below (which were adpated 
 1. ```gem install rails```
 1. ```sudo apt-get install nodejs```
 1. ```sudo apt-get install git```
+1. ```sudo apt-get install libxslt-dev libxml2-dev```
 
 ## Installation of CanaryBoard
 
@@ -39,7 +40,7 @@ Now that you've intalled Ruby and other packages, you will install CanaryBoard o
 1. ```bundle exec rake db:setup```
 1. ```bundle exec rake db:test:prepare```
 1. ```bundle exec rspec spec/```
-1. ```rails s``` 
+1. ```rails s```
 
 ## Using CanaryBoard
 

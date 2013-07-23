@@ -13,7 +13,7 @@ While Rails can be installed on many operating systems, we've include detailed i
 You'll need to first download and install Ubuntu 12.04 LTS. To do this, go to [Ubuntu](http://releases.ubuntu.com/precise/).
 
 
-## Installation of Rails on Ubuntu 12.04 LTS
+## Installing Rails on Ubuntu 12.04 LTS
 
 After you've installed Ubunu, follow the instructions below (which were adpated from [digitalocean](https://www.digitalocean.com/community/articles/how-to-install-ruby-on-rails-on-ubuntu-12-04-lts-precise-pangolin-with-rvm))
 
@@ -30,7 +30,7 @@ After you've installed Ubunu, follow the instructions below (which were adpated 
 1. ```sudo apt-get install git```
 1. ```sudo apt-get install libxslt-dev libxml2-dev```
 
-## Installation of CanaryBoard
+## Installing CanaryBoard
 
 Now that you've intalled Ruby and other packages, you will install CanaryBoard on this instance.
 
@@ -41,6 +41,12 @@ Now that you've intalled Ruby and other packages, you will install CanaryBoard o
 1. ```bundle exec rake db:test:prepare```
 1. ```bundle exec rspec spec/```
 1. ```rails s```
+2. 
+
+## Running CanaryBoard
+
+1. Launch and web browser and type http://[hostname]:3000
+1. Login to the application using the default credentials (```admin:admin```).
 
 ## Using CanaryBoard
 

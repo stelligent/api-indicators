@@ -51,9 +51,9 @@ Now that you've intalled Ruby and other packages, you will install CanaryBoard o
 
 After your CanaryBoard Rails app is up and running, you can use the examples here: 
 
-* *set-indicators.rb* - You can customize [set-indicators.rb](https://gist.github.com/PaulDuvall/552cbe661e0e943a0de1)
-* https://github.com/stelligent/canaryboard/blob/master/script/api-usage-example to update the status indicators for projects and services.
-* For more specific examples,  and [update-indicators.rb](https://gist.github.com/PaulDuvall/f6c59b78fc8af286f5c8). 
+* **set-indicators.rb** - You can customize [set-indicators.rb](https://gist.github.com/PaulDuvall/552cbe661e0e943a0de1)
+* **update-indicators.rb** - You can customize and [update-indicators.rb](https://gist.github.com/PaulDuvall/f6c59b78fc8af286f5c8). 
+* You can also view [api-usage-example](https://github.com/stelligent/canaryboard/blob/master/script/api-usage-example)to update the status indicators for projects and services
 
 ## More Information
 

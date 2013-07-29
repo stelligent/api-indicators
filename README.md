@@ -18,7 +18,7 @@ You'll need to first download and install Ubuntu 12.04 LTS. To do this, go to [U
 After you've installed Ubunu, follow the instructions below (which were adpated from [digitalocean](https://www.digitalocean.com/community/articles/how-to-install-ruby-on-rails-on-ubuntu-12-04-lts-precise-pangolin-with-rvm))
 
 1. ```sudo apt-get update```
-1. ```sudo apt-get install curl```
+1. ```sudo apt-get -y install curl nodejs git libxslt-dev libxml2-dev```
 1. ```\curl -L https://get.rvm.io | bash -s stable```
 1. ```source ~/.rvm/scripts/rvm```
 1. ```rvm requirements```
@@ -26,9 +26,6 @@ After you've installed Ubunu, follow the instructions below (which were adpated 
 1. ```rvm use 1.9.3 --default```
 1. ```rvm rubygems current```
 1. ```gem install rails```
-1. ```sudo apt-get install nodejs```
-1. ```sudo apt-get install git```
-1. ```sudo apt-get install libxslt-dev libxml2-dev```
 
 ## Installing CanaryBoard
 

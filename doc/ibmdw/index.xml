@@ -125,144 +125,15 @@ To get the CanaryBoard tool up and running on a Linux instance, launch and acces
 
 <heading alttoc="" refname="" type="minor">Step 2: Install packages</heading>
 
-<p><code type="inline">ssh</code> into the server and run the following commands. (If you're using a packaging system other than <code type="inline">apt-get </code> <mdash/> such as <code type="inline">yum</code> or <code type="inline">rpm </code> <mdash/> modify the commands accordingly.)</p>
-
-<p>Get any OS updates:</p>
-
-<code type="section" width="100%">
-sudo apt-get update
-</code>
-
-<p>Install Curl:</p>
-
-
-<code type="section" width="100%">
-sudo apt-get install curl
-</code>
-
-<p>Use Curl to download Ruby Version Manager (RVM):</p>
-
-
-<code type="section" width="100%">
-\curl -L https://get.rvm.io | bash -s stable
-</code>
-
-<p>Install RVM:</p>
-
-
-<code type="section" width="100%">
-source ~/.rvm/scripts/rvm
-</code>
-
-<p>Run RVM requirements:</p>
-
-
-
-<code type="section" width="100%">
-rvm requirements
-</code>
-
-<p>Install Ruby version 1.9.3:</p>
-
-
-<code type="section" width="100%">
-rvm install 1.9.3
-</code>
-
-<p>Make Ruby version 1.9.3 the default version:</p>
-
-
-<code type="section" width="100%">
-rvm use 1.9.3 --default
-</code>
-
-<p>Get the most current version of RubyGems:</p>
-
-
-<code type="section" width="100%">
-rvm rubygems current
-</code>
-
-<p>Install Ruby on Rails:</p>
-
-
-<code type="section" width="100%">
-gem install rails
-</code>
-
-<p>Install node.js (required for Rails 3):</p>
-
-
-<code type="section" width="100%">
-sudo apt-get install nodejs
-</code>
-
-<p>Finally, install Git:</p>
-
-
-<code type="section" width="100%">
-sudo apt-get install git
-</code>
+<p><code type="inline">ssh</code> into the server and run the commands described in the <em>Installing Rails…</em> section of the CanaryBoard readme located at <a href="https://github.com/stelligent/canaryboard/">https://github.com/stelligent/canaryboard/</a>. In running these commands, you will install all necessary packages including the Ruby Version Manager (RVM), Ruby, Git and Rails. (If you're using a packaging system other than <code type="inline">apt-get </code> <mdash /> such as <code type="inline">yum</code> or <code type="inline">rpm </code> <mdash /> modify the commands accordingly.)</p>
 
 <p>Now that you've installed all of the packages, you're ready to install, configure, and run CanaryBoard. </p>
 
 <heading alttoc="" refname="" type="minor">Step 3: Install, configure, and run CanaryBoard</heading>
 
-<p>CanaryBoard is a Rails application and RESTful API that was developed by Stelligent and that's hosted on GitHub. Get the application up and running by following these simple steps:</p>
+<p>CanaryBoard is a Rails application and RESTful API that was developed by Stelligent and that's hosted on GitHub. You need to follow a few simple steps to get the application up and running and they are described within the <em>Installing CanaryBoard</em> section of the CanaryBoard readme located at <a href="https://github.com/stelligent/canaryboard/">https://github.com/stelligent/canaryboard/</a>. These steps include getting the latest copy from the Git repository, installing any Ruby gems required by CanaryBoard, setting up and seeding the database, running automated tests and starting the Rails server.</p>
 
-<ol>
-<li>Get the latest copy of the repository:
-<code type="section" width="100%">
-git clone https://github.com/stelligent/canaryboard.git
-</code>
-</li>
-
-<li>Change to the directory named canaryboard:
-
-<code type="section" width="100%">
-cd canaryboard
-</code>
-</li>
-
-<li>Install any packages that the Rails application requires:
-
-<code type="section" width="100%">
-bundle install
-</code>
-</li>
-
-<li>Set up the database:
-
-<code type="section" width="100%">
-bundle exec rake db:setup
-</code>
-</li>
-
-<li>Prepare the seed data for the RSpec tests. (RSpec is testing tool for the Ruby programming language):
-
-
-<code type="section" width="100%">
-bundle exec rake db:test:prepare
-</code>
-</li>
-
-<li>Run the RSpec tests:
-<code type="section" width="100%">
-bundle exec rspec spec/
-</code>
-</li>
-
-<li>Start the Rails server:
-
-
-<code type="section" width="100%">
-rails s
-</code>
-</li>
-
-<li>Launch the website for your CanaryBoard application by typing <code type="inline">http://localhost:3000</code> in your browser. (If necessary, change <code type="inline">localhost</code> to your server location.) Be sure that port 3000 is available and not being blocked.</li>
-
-</ol>
+<p>Launch the website for your CanaryBoard application by typing <code type="inline">http://localhost:3000</code> in your browser. (If necessary, change <code type="inline">localhost</code> to your server location.) Be sure that port 3000 is available.</p>
 
 <p>You should see an empty status board like the one in Figure 2:</p>
 
@@ -293,118 +164,9 @@ Click the <strong>Log in</strong> link to display a login screen similar to Figu
 
 <heading alttoc="" refname="" type="major">Programmatically updating the DevOps dashboard</heading>
 
-<p>
-You'll use two Ruby scripts to set and update the dashboard's indicators through the CanaryBoard REST API.  (I adapted the article's scripts from the CanaryBoard documentation's REST API examples; see <a href="#resources">Resources</a>.) Begin at the Linux server command prompt and create a new Ruby file called set-indicators.rb:</p>
+<p>You'll use two Ruby scripts to create the dashboard's indicators through the CanaryBoard REST API. They will be called set-indicators.rb and update-indicators.rb.</p>
 
-<code type="section">sudo vim set-indicators.rb</code>
-
-<p>The script in Listing 1 creates the initial DevOps indicators:</p>
-
-<code type="section" width="100%">
-<heading refname="listing1" type="code">Listing 1. Ruby script to create initial DevOps indicators</heading>
-#!/usr/bin/env ruby
-require 'net/http'
-require 'json'
- 
-API_URL = URI.parse("http://<strong>localhost</strong>:3000/api")
-API_KEY = "<strong>changeme</strong>" #http://localhost:3000/profile
- 
-def get url
-request = Net::HTTP::Get.new(API_URL.path + url)
-request["Content-Type"] = "application/json"
-sock = Net::HTTP.new(API_URL.host, API_URL.port)
-sock.read_timeout = 1000
-result = sock.start { |http| http.request(request) }
-JSON.parse(result.body, symbolize_names: true)
-end
- 
-def post url, body = {}
-request = Net::HTTP::Post.new(API_URL.path + url)
-request.body = body.to_json
-request["Content-Type"] = "application/json"
-request["Authorization"] = "Token token=\"#{API_KEY}\""
-sock = Net::HTTP.new(API_URL.host, API_URL.port)
-sock.read_timeout = 1000
-result = sock.start { |http| http.request(request) }
-JSON.parse(result.body, symbolize_names: true)
-end
- 
-def put url, body = {}
-request = Net::HTTP::Put.new(API_URL.path + url)
-request.body = body.to_json
-request["Content-Type"] = "application/json"
-request["Authorization"] = "Token token=\"#{API_KEY}\""
-sock = Net::HTTP.new(API_URL.host, API_URL.port)
-sock.read_timeout = 1000
-result = sock.start { |http| http.request(request) }
-JSON.parse(result.body, symbolize_names: true)
-end
- 
-def delete url
-request = Net::HTTP::Delete.new(API_URL.path + url)
-request["Content-Type"] = "application/json"
-request["Authorization"] = "Token token=\"#{API_KEY}\""
-sock = Net::HTTP.new(API_URL.host, API_URL.port)
-sock.read_timeout = 1000
-result = sock.start { |http| http.request(request) }
-JSON.parse(result.body, symbolize_names: true)
-end
- 
-puts "\tListing projects"
-puts get "/projects"
- 
-puts "\tListing services"
-puts get "/services" 
-
-puts "\tCreating new project (returns created project)"
-puts project = post("/projects", { project: { name: "FinIT" } })
-raise StandardError unless project[:id]
- 
-puts "\tCreating new service (returns created service)"
-puts service = post("/services", { service: { name: "Environment" } })
- 
-puts "\tCreating new project (returns created project)"
-puts project = post("/projects", { project: { name: "TimesheetIT" } })
-raise StandardError unless project[:id]
- 
-puts "\tCreating new service (returns created service)"
-puts service = post("/services", { service: { name: "Build" } })
- 
-puts "\tCreating new project (returns created project)"
-puts project = post("/projects", { project: { name: "HRIT" } })
-raise StandardError unless project[:id]
- 
-puts "\tCreating new service (returns created service)"
-puts service = post("/services", { service: { name: "Test" } })
- 
-puts "\tCreating new project (returns created project)"
-puts project = post("/projects", { project: { name: "ProjectIT" } })
-raise StandardError unless project[:id]
- 
-puts "\tCreating new service (returns created service)"
-puts service = post("/services", { service: { name: "Deploy" } }) 
- 
-puts "\tListing indicators"
-puts indicators = get("/indicators")
- 
-puts "\tListing available statuses"
-puts statuses = get("/statuses")
- 
-puts "\tUpdating indicator's status (returns created event)"
-# Finding indicator for new service
-indicator = indicators.select { |i| i[:project][:id] == project[:id] and \\
-i[:service][:id] == service[:id] }.first
-# Finding status to set
-status = statuses.select { |i| i[:name] == "red" }.first
-puts post "/indicators/#{indicator[:id]}/events", event: {
-message: "sorry guys system went down",
-status_id: status[:id]
-}
- 
-puts "\tListing indicator's history"
-puts get "/indicators/#{indicator[:id]}/events"
-
-</code>
+<p>Begin at the Linux server command prompt and create a new Ruby file called set-indicators.rb. Paste the <em>customized</em> contents from the example in the set-indicators.rb available in the  <em>Using CanaryBoard</em> section of the readme located at <a href="https://github.com/stelligent/canaryboard/">https://github.com/stelligent/canaryboard</a>. If you're not running your server on localhost, change <code type="inline">localhost</code> to your server's location as part of the <code type="inline">API_URL</code> variable. Change the <code type="inline">API_KEY</code> value from <code type="inline">changeme</code> to the value that you got from the CanaryBoard profile page. You will run this script later.</p>
 
 <sidebar>
 <heading alttoc="" refname="" type="sidebar">Versatile scripts</heading>
@@ -412,65 +174,12 @@ puts get "/indicators/#{indicator[:id]}/events"
 </p>
 </sidebar>
 
-<p>Paste the contents of <a href="#listing1">Listing 1</a> into the set-indicators.rb file that you just created. Change the <code type="inline">API_KEY</code> value from <code type="inline">changeme</code> to the value that you got from the CanaryBoard profile page. You might also need to change the DNS name for the <code type="inline">API_URL</code> value from <code type="inline">localhost</code> to the name of the server where your CanaryBoard is hosted.</p>  
-
-
 <p>
-From the Linux server's command line, create a new Ruby file called update-indicators.rb:</p>
+Now, from the Linux server's command line, create a new Ruby file called update-indicators.rb. Paste the <em>customized</em> contents of the code listing from the <em>Using CanaryBoard</em> section of the CanaryBoard readme into the update-indicators.rb file that you just created. If you're not running your server on localhost, change <code type="inline">localhost</code> to your server's location as part of the <code type="inline">API_URL</code> variable. Change the <code type="inline">API_KEY</code> value from <code type="inline">changeme</code> to the value that you got from the CanaryBoard profile page. </p> 
 
-<code type="section">sudo vim update-indicators.rb</code>
+<p>The update-indicators.rb script uses Ruby to update the dashboard's indicators through the CanaryBoard REST API.</p>
 
-<p>The script in Listing 2 uses Ruby to update the dashboard's indicators through the CanaryBoard REST API:</p>
-
-
-<code type="section" width="100%">
-<heading refname="listing2" type="code">Listing 2. Ruby script to update the DevOps indicators</heading>
-#!/usr/bin/env ruby
-require 'net/http'
-require 'json'
-
-API_URL = URI.parse("http://<strong>localhost</strong>:3000/api")
-API_KEY = "<strong>changeme</strong>" #http://localhost:3000/profile
- 
-def get url
-  request = Net::HTTP::Get.new(API_URL.path + url)
-  request["Content-Type"] = "application/json"
-  sock = Net::HTTP.new(API_URL.host, API_URL.port)
-  sock.read_timeout = 1000
-  result = sock.start { |http| http.request(request) }
-  JSON.parse(result.body, symbolize_names: true)
-end
-
-def post url, body = {}
-  request = Net::HTTP::Post.new(API_URL.path + url)
-  request.body = body.to_json
-  request["Content-Type"] = "application/json"
-  request["Authorization"] = "Token token=\"#{API_KEY}\""
-  sock = Net::HTTP.new(API_URL.host, API_URL.port)
-  sock.read_timeout = 1000
-  result = sock.start { |http| http.request(request) }
-  JSON.parse(result.body, symbolize_names: true)
-end
-
-# Getting the list of indicators and selecting the one we need
-indicator = get("/indicators").select { |ind| ind[:project][:name] == "Project 2" \\
-and ind[:service][:name] == "Service 2" }.first
-
-# Getting the list of possible statuses and selecting the one we need
-status = get("/statuses").select { |i| i[:name] == "yellow" }.first
-
-# Setting the status
-post "/indicators/#{indicator[:id]}/events", event: {
-  message: "This text is supposed to explain something",
-  status_id: status[:id]
-}
-</code>
-
-<p>Paste the contents of <a href="#listing2">Listing 2</a> into the update-indicators.rb file that you just created. Change the <code type="inline">API_KEY</code> value from <code type="inline">changeme</code> to the value that you got from the CanaryBoard profile page. If you're not running your server on localhost, change <code type="inline">localhost</code> to your server's location.  
-</p>
-
-<p>
-Use these commands (which assume that your set-indicators.rb and update-indicator.rb files are in the home directory on your instance) to run the Ruby programs:</p>
+<p>Use these commands (which assume that your set-indicators.rb and update-indicator.rb files are in the home directory on your instance) to run the Ruby programs:</p>
 
 <code type="section" width="100%">
 sudo ruby ~/canaryboard-set-indicators.rb
@@ -478,10 +187,8 @@ sudo ruby ~/canaryboard-update-indicators.rb
 </code>
 
 
-
-
 <p>
-Go to https://localhost:3000/ (or equivalent) to see the results of the services and events that you created. When the code in <a href="#listing2">Listing 2</a> runs, it updates all of the events for the services that are listed in the script. By clicking on any indicator in the dashboard, you can see a history of these events. If you want this script to run with every code check-in, you can call it from your Continuous Integration server or run it through <code type="inline">cron</code> or another scheduling system. Figure 5 shows example results for the Deploy service:   
+Go to https://localhost:3000/ (or equivalent) to see the results of the services and events that you created. When the code in update-indicators.rb runs, it updates all of the events for the services that are listed in the script. By clicking on any indicator in the dashboard, you can see a history of these events. If you want this script to run with every code check-in, you can call it from your Continuous Integration server or run it through <code type="inline">cron</code> or another scheduling system. Figure 5 shows example results for the Deploy service:   
 </p>
 
 <figure>
@@ -489,7 +196,7 @@ Go to https://localhost:3000/ (or equivalent) to see the results of the services
 <img alt="Screen capture of a CanaryBoard page that shows a history of the events logged for the Deploy indicator. Each row contains a date- and time-stamped description of a event that's related to deployment." height="213" src="canaryboard_detail.jpg" width="580"/>
 </figure>
 
-<p><a href="#listing1">Listing 1</a> and <a href="#listing2">Listing 2</a> are hard-coded for specific services, but you can make all of the code dynamic.</p>
+<p>set-indicators.rb and update-indicators.rb are hard-coded for specific services, but you can make all of the code dynamic.</p>
 
 <heading alttoc="" refname="" type="major">In conclusion</heading>
 <sidebar>

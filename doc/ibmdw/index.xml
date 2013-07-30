@@ -1,0 +1,557 @@
+<?xml version="1.0" encoding="UTF-8"?><dw-document xmlns:dw="http://www.ibm.com/developerWorks/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Program%20Files/Oxygen%20XML%20Editor%2013/frameworks/dwedtools-framework/developerworks/schema/6.0/dw-document-6.0.xsd">
+
+<dw-article auto-number="no" local-site="worldwide" page-end-btt-link="yes" skill-level="3">
+<id cma-id="937083" original="yes"/>
+
+<keywords content="devops, dashboard, CanaryBoard, agile, test-driven infrastructure, continuous testing, infrastructure automation, infrastructure, agility, version, versioning, git, test-driven development, svn, subversion, cloud, tdd, continuous integration, continuous delivery, paul duvall, cloud computing"/>
+<meta-dctype>
+<cma-defined-type/>
+</meta-dctype>
+<meta-dcsubject>
+<cma-defined-subject/>
+</meta-dcsubject>
+
+<meta-last-updated day="16" initials="mwfergus@us.ibm.com" month="07" year="2013"/>
+
+<content-area-primary name="agile"/>
+    <content-area-secondary name="opensource"/>
+
+<!-- <web-feed-autodiscovery feed-url="http://www.ibm.com/developerworks/podcast/channel-dwall.rss" feed-title="IBM developerWorks podcasts" feed-type="rss"/> -->
+
+<series>
+<series-title>Agile DevOps</series-title>
+<series-url>http://www.ibm.com/developerworks/views/agile/libraryview.jsp?series_title_by=agile+devops</series-url>
+</series>
+
+<title>Build a DevOps dashboard</title>
+
+<subtitle>Display real-time information for cross-functional teams</subtitle>
+<!--<rss-image-url>http://www.ibm.com/developerworks/i/t-j-f-immutable_ebf7fb.jpg</rss-image-url>-->
+
+<pdf pages="12" paperSize="common" size="311 KB" url="a-devops10-pdf.pdf"/><author email="paul.duvall@stelligent.com" email-cc="jaloi@us.ibm.com" jobtitle="CTO" publish-email="no">
+<bio><a href="http://twitter.com/paulduvall">Paul Duvall</a> is the CTO of <a href="http://www.stelligent.com/">Stelligent</a>. A featured speaker at many leading software conferences, he has worked in virtually every role on software projects: developer, project manager, architect, and tester. He is the principal author of <em><a href="http://amzn.to/cibook">Continuous Integration: Improving Software Quality and Reducing Risk</a></em> (Addison-Wesley, 2007) and a <a href="http://en.wikipedia.org/wiki/Jolt_Awards#Technical_2">2008 Jolt Award Winner</a>. He is also the author of <em><a href="http://amzn.to/startupatcloud">Startup@Cloud</a></em> and <em><a href="http://www.informit.com/store/product.aspx?isbn=0321793269">DevOps in the Cloud LiveLessons</a></em> (Pearson Education, June 2012). He's contributed to several other books as well. Paul authored the 20-article <em><a href="http://www.ibm.com/developerworks/views/java/libraryview.jsp?search_by=automation+people:">Automation for the people</a></em> series on developerWorks. He is passionate about getting high-quality software to users quicker and more often through continuous delivery and the cloud. Read his blog at <a href="http://www.stelligent.com/blog/">Stelligent.com</a>.</bio>
+<img align="left" alt="Paul Duvall" src="http://www.ibm.com/developerworks/i/p-pduvall2.jpg" valign="top"/><author-name>
+<GivenName>Paul</GivenName>
+<FamilyName>Duvall</FamilyName>
+</author-name>
+<company-name>Stelligent</company-name>
+</author>
+
+
+
+<date-published day="16" month="07" year="2013"/>
+
+<!-- <date-updated day="31" month="12" year="2010" /> -->
+
+<abstract>What if you could get instant feedback on the health of your software system with every change applied -- not only to the software application, but also to the database, infrastructure, and configuration? In this final Agile DevOps installment, DevOps expert Paul Duvall helps you set up a DevOps dashboard by using the open source CanaryBoard tool. The dashboard reveals the state of the entire software system under development -- from check-in to production -- at a glance.</abstract>
+
+<abstract-extended>What if you could get instant feedback on the health of your software system with every change applied <mdash/> not only to the software application, but also to the database, infrastructure, and configuration? In this final <a href="http://www.ibm.com/developerworks/views/java/libraryview.jsp?search_by=agile+devops:"><em>Agile DevOps</em></a> installment, DevOps expert Paul Duvall helps you set up a DevOps dashboard by using the open source CanaryBoard tool. The dashboard reveals the state of the entire software system under development <mdash/> from check-in to production <mdash/> at a glance.</abstract-extended>
+<docbody>
+
+
+<sidebar>
+<heading alttoc="" refname="" type="sidebar">About this series</heading>
+<p>Developers can learn a lot from operations, and operations
+can learn a lot from developers. This series of articles is dedicated
+to exploring the practical uses of applying an operations mindset to development, and vice versa <mdash/> and of considering software products as holistic entities that can be delivered with more agility and frequency than ever before.</p>
+</sidebar> 
+
+<p>So far in this series, you've learned:</p>
+
+<ul>
+<li>How DevOps and Continuous Delivery are <a href="http://www.ibm.com/developerworks/java/library/a-devops1">flattening the release process</a></li>
+
+<li>How you can describe your <a href="http://www.ibm.com/developerworks/java/library/a-devops2">infrastructure in code</a> by using tools like Chef or Puppet</li>
+
+<li>How you can write <a href="http://www.ibm.com/developerworks/java/library/a-devops5">tests for your infrastructure and deployments</a></li>
+
+<li>How to ensure that your infrastructure is resilient with tools like the <a href="http://www.ibm.com/developerworks/java/library/a-devops4/">Chaos Monkey</a></li>
+
+<li>How to create a <a href="http://www.ibm.com/developerworks/agile/library/a-devops8/">Continuous Delivery platform</a></li>
+
+<li>How to <a href="http://www.ibm.com/developerworks/java/library/a-devops6/">version all software system assets</a></li>
+
+</ul>
+
+<p>And because the organizational aspects of DevOps are just as important as the technical ones, I've also prescribed ways to <a href="http://www.ibm.com/developerworks/library/a-devops9/">break down traditional development and operations silos</a> to enhance teamwork and communication.</p>
+
+<p>When your whole software system is described in code and committed to a version-control repository, changes occur frequently, creating a crucial need for accurate real-time feedback for everyone on your team or in your organization. In this last article in the <a href="http://www.ibm.com/developerworks/views/agile/libraryview.jsp?series_title_by=agile+devops"><em>Agile DevOps</em></a> series, you'll learn how you can tie all of this feedback together and present it in an easy-to-digest form through a DevOps dashboard. All cross-functional team members in your organization can use the dashboard to learn the status of the system under development and in production. They can then make informed decisions based on reality <mdash/> rather than on the perceptions of the more vocal team members. 
+</p>
+
+<heading alttoc="" refname="" type="major">Introducing CanaryBoard</heading>
+
+<p>CanaryBoard is an open source tool that's modeled on the Stashboard open source tool (which is based on tools from large cloud providers). CanaryBoard is intended to provide a log of the status of applications or services by project, but you can customize it to show whatever you choose. And you can run CanaryBoard by using purely open source platforms. 
+</p>
+
+<p>
+Figure 1 shows a dashboard that I customized to show the status of some DevOps indicators (Environment, Build, Test, and Deploy) for a project. By running scripts when every code check-in occurs, I can update the dashboard automatically to provide a real-time status for each indicator.  	
+</p>
+
+<figure>
+<heading alttoc="" refname="fig1" type="figure">Figure 1. DevOps dashboard status using CanaryBoard</heading>
+<img alt="Screen capture of a dashboard using the open-source CanaryBoard framework. The dashboard shows four DevOps indicators: Environment, Build, Test. and Deploy. The left-most column provides the most current state of these DevOps indicators." height="232" src="canaryboard_indicators.jpg" width="580"/>
+</figure>
+
+<p>You can customize your CanaryBoard dashboard to show anything that's important for your team or organization. You can also create multiple dashboards to reflect various levels within your organization. Many other dashboard platforms are available that integrate with other tools that you might already be using; some dashboard platforms are free and open source, and others require monthly fees. As a developer, I like to have full control not only of customization, but also of the platforms that the software can run on. That's  why my company created CanaryBoard. 
+</p>
+
+<heading alttoc="" refname="" type="major">Setting up the DevOps dashboard</heading>
+
+<sidebar>
+<heading alttoc="" refname="" type="sidebar">Choices, choices</heading>
+<p>
+You can run CanaryBoard on virtually any OS, and you can use almost any programming language to modify the data pushed to the service through its REST API. This article uses:</p>
+<ul>
+<li>Ruby to access CanaryBoard's RESTful API</li>
+<li>Linux<reg/> to host CanaryBoard</li>
+<li>The same Linux instance to run the CanaryBoard scripts</li>
+</ul>
+
+<p>Although the examples are specific to this collection of tools, you can slightly alter the instructions to fit the needs of your own infrastructure provider, OS, packaging system, and programming language.</p>
+</sidebar>
+
+
+
+<p>
+To get the CanaryBoard tool up and running on a Linux instance, launch and access a compute instance, install the required packages, download and configure files, and run CanaryBoard.
+</p>
+
+
+
+<heading alttoc="" refname="" type="minor">Step 1: Download and launch the  server</heading>
+
+<p>Download Ubuntu 12.04 LTS server (see <a href="#resources">Resources</a> for a link to the download page). Then launch your Ubuntu instance.</p>
+
+
+<heading alttoc="" refname="" type="minor">Step 2: Install packages</heading>
+
+<p><code type="inline">ssh</code> into the server and run the following commands. (If you're using a packaging system other than <code type="inline">apt-get </code> <mdash/> such as <code type="inline">yum</code> or <code type="inline">rpm </code> <mdash/> modify the commands accordingly.)</p>
+
+<p>Get any OS updates:</p>
+
+<code type="section" width="100%">
+sudo apt-get update
+</code>
+
+<p>Install Curl:</p>
+
+
+<code type="section" width="100%">
+sudo apt-get install curl
+</code>
+
+<p>Use Curl to download Ruby Version Manager (RVM):</p>
+
+
+<code type="section" width="100%">
+\curl -L https://get.rvm.io | bash -s stable
+</code>
+
+<p>Install RVM:</p>
+
+
+<code type="section" width="100%">
+source ~/.rvm/scripts/rvm
+</code>
+
+<p>Run RVM requirements:</p>
+
+
+
+<code type="section" width="100%">
+rvm requirements
+</code>
+
+<p>Install Ruby version 1.9.3:</p>
+
+
+<code type="section" width="100%">
+rvm install 1.9.3
+</code>
+
+<p>Make Ruby version 1.9.3 the default version:</p>
+
+
+<code type="section" width="100%">
+rvm use 1.9.3 --default
+</code>
+
+<p>Get the most current version of RubyGems:</p>
+
+
+<code type="section" width="100%">
+rvm rubygems current
+</code>
+
+<p>Install Ruby on Rails:</p>
+
+
+<code type="section" width="100%">
+gem install rails
+</code>
+
+<p>Install node.js (required for Rails 3):</p>
+
+
+<code type="section" width="100%">
+sudo apt-get install nodejs
+</code>
+
+<p>Finally, install Git:</p>
+
+
+<code type="section" width="100%">
+sudo apt-get install git
+</code>
+
+<p>Now that you've installed all of the packages, you're ready to install, configure, and run CanaryBoard. </p>
+
+<heading alttoc="" refname="" type="minor">Step 3: Install, configure, and run CanaryBoard</heading>
+
+<p>CanaryBoard is a Rails application and RESTful API that was developed by Stelligent and that's hosted on GitHub. Get the application up and running by following these simple steps:</p>
+
+<ol>
+<li>Get the latest copy of the repository:
+<code type="section" width="100%">
+git clone https://github.com/stelligent/canaryboard.git
+</code>
+</li>
+
+<li>Change to the directory named canaryboard:
+
+<code type="section" width="100%">
+cd canaryboard
+</code>
+</li>
+
+<li>Install any packages that the Rails application requires:
+
+<code type="section" width="100%">
+bundle install
+</code>
+</li>
+
+<li>Set up the database:
+
+<code type="section" width="100%">
+bundle exec rake db:setup
+</code>
+</li>
+
+<li>Prepare the seed data for the RSpec tests. (RSpec is testing tool for the Ruby programming language):
+
+
+<code type="section" width="100%">
+bundle exec rake db:test:prepare
+</code>
+</li>
+
+<li>Run the RSpec tests:
+<code type="section" width="100%">
+bundle exec rspec spec/
+</code>
+</li>
+
+<li>Start the Rails server:
+
+
+<code type="section" width="100%">
+rails s
+</code>
+</li>
+
+<li>Launch the website for your CanaryBoard application by typing <code type="inline">http://localhost:3000</code> in your browser. (If necessary, change <code type="inline">localhost</code> to your server location.) Be sure that port 3000 is available and not being blocked.</li>
+
+</ol>
+
+<p>You should see an empty status board like the one in Figure 2:</p>
+
+<figure>
+<heading alttoc="" refname="fig2" type="figure">Figure 2. Blank dashboard ready to be configured</heading>
+<img alt="Screen capture of an empty dashboard created with the CanaryBoard framework" height="117" src="canaryboard_blank.jpg" width="580"/>
+</figure>
+
+<p>
+Click the <strong>Log in</strong> link to display a login screen similar to Figure 3: 
+</p>
+
+<figure>
+<heading alttoc="" refname="fig3" type="figure">Figure 3. CanaryBoard login screen</heading>
+<img alt="Login screen for the CanaryBoard Rails application." height="336" src="canaryboard_login.jpg" width="291"/>
+</figure>
+
+
+
+<p>Enter the default username (<code type="inline">admin</code>) and default password (<code type="inline">admin</code>). After logging in, click the <strong>Profile</strong> link, then click <strong>Edit</strong> to change your password to something other than the default.</p>
+
+<p>To run this article's example code, you need to get the API Key that's set as part of the data seeding. Go back to your profile (http://localhost:3000/profile) and copy the API Key value. Figure 4 shows an example of the profile screen with an API Key:</p>   
+
+<figure>
+<heading alttoc="" refname="fig4" type="figure">Figure 4. User profile used to get API Key</heading>
+<img alt="Screen capture of the CanaryBoard user profile page that displays the API key" height="282" src="canaryboard_apikey.jpg" width="251"/>
+</figure>
+
+<heading alttoc="" refname="" type="major">Programmatically updating the DevOps dashboard</heading>
+
+<p>
+You'll use two Ruby scripts to set and update the dashboard's indicators through the CanaryBoard REST API.  (I adapted the article's scripts from the CanaryBoard documentation's REST API examples; see <a href="#resources">Resources</a>.) Begin at the Linux server command prompt and create a new Ruby file called set-indicators.rb:</p>
+
+<code type="section">sudo vim set-indicators.rb</code>
+
+<p>The script in Listing 1 creates the initial DevOps indicators:</p>
+
+<code type="section" width="100%">
+<heading refname="listing1" type="code">Listing 1. Ruby script to create initial DevOps indicators</heading>
+#!/usr/bin/env ruby
+require 'net/http'
+require 'json'
+ 
+API_URL = URI.parse("http://<strong>localhost</strong>:3000/api")
+API_KEY = "<strong>changeme</strong>" #http://localhost:3000/profile
+ 
+def get url
+request = Net::HTTP::Get.new(API_URL.path + url)
+request["Content-Type"] = "application/json"
+sock = Net::HTTP.new(API_URL.host, API_URL.port)
+sock.read_timeout = 1000
+result = sock.start { |http| http.request(request) }
+JSON.parse(result.body, symbolize_names: true)
+end
+ 
+def post url, body = {}
+request = Net::HTTP::Post.new(API_URL.path + url)
+request.body = body.to_json
+request["Content-Type"] = "application/json"
+request["Authorization"] = "Token token=\"#{API_KEY}\""
+sock = Net::HTTP.new(API_URL.host, API_URL.port)
+sock.read_timeout = 1000
+result = sock.start { |http| http.request(request) }
+JSON.parse(result.body, symbolize_names: true)
+end
+ 
+def put url, body = {}
+request = Net::HTTP::Put.new(API_URL.path + url)
+request.body = body.to_json
+request["Content-Type"] = "application/json"
+request["Authorization"] = "Token token=\"#{API_KEY}\""
+sock = Net::HTTP.new(API_URL.host, API_URL.port)
+sock.read_timeout = 1000
+result = sock.start { |http| http.request(request) }
+JSON.parse(result.body, symbolize_names: true)
+end
+ 
+def delete url
+request = Net::HTTP::Delete.new(API_URL.path + url)
+request["Content-Type"] = "application/json"
+request["Authorization"] = "Token token=\"#{API_KEY}\""
+sock = Net::HTTP.new(API_URL.host, API_URL.port)
+sock.read_timeout = 1000
+result = sock.start { |http| http.request(request) }
+JSON.parse(result.body, symbolize_names: true)
+end
+ 
+puts "\tListing projects"
+puts get "/projects"
+ 
+puts "\tListing services"
+puts get "/services" 
+
+puts "\tCreating new project (returns created project)"
+puts project = post("/projects", { project: { name: "FinIT" } })
+raise StandardError unless project[:id]
+ 
+puts "\tCreating new service (returns created service)"
+puts service = post("/services", { service: { name: "Environment" } })
+ 
+puts "\tCreating new project (returns created project)"
+puts project = post("/projects", { project: { name: "TimesheetIT" } })
+raise StandardError unless project[:id]
+ 
+puts "\tCreating new service (returns created service)"
+puts service = post("/services", { service: { name: "Build" } })
+ 
+puts "\tCreating new project (returns created project)"
+puts project = post("/projects", { project: { name: "HRIT" } })
+raise StandardError unless project[:id]
+ 
+puts "\tCreating new service (returns created service)"
+puts service = post("/services", { service: { name: "Test" } })
+ 
+puts "\tCreating new project (returns created project)"
+puts project = post("/projects", { project: { name: "ProjectIT" } })
+raise StandardError unless project[:id]
+ 
+puts "\tCreating new service (returns created service)"
+puts service = post("/services", { service: { name: "Deploy" } }) 
+ 
+puts "\tListing indicators"
+puts indicators = get("/indicators")
+ 
+puts "\tListing available statuses"
+puts statuses = get("/statuses")
+ 
+puts "\tUpdating indicator's status (returns created event)"
+# Finding indicator for new service
+indicator = indicators.select { |i| i[:project][:id] == project[:id] and \\
+i[:service][:id] == service[:id] }.first
+# Finding status to set
+status = statuses.select { |i| i[:name] == "red" }.first
+puts post "/indicators/#{indicator[:id]}/events", event: {
+message: "sorry guys system went down",
+status_id: status[:id]
+}
+ 
+puts "\tListing indicator's history"
+puts get "/indicators/#{indicator[:id]}/events"
+
+</code>
+
+<sidebar>
+<heading alttoc="" refname="" type="sidebar">Versatile scripts</heading>
+<p>Keep in mind that <mdash/> with modifications <mdash/> you can use this article's scripts on virtually any other platform that can run Ruby on Rails. 
+</p>
+</sidebar>
+
+<p>Paste the contents of <a href="#listing1">Listing 1</a> into the set-indicators.rb file that you just created. Change the <code type="inline">API_KEY</code> value from <code type="inline">changeme</code> to the value that you got from the CanaryBoard profile page. You might also need to change the DNS name for the <code type="inline">API_URL</code> value from <code type="inline">localhost</code> to the name of the server where your CanaryBoard is hosted.</p>  
+
+
+<p>
+From the Linux server's command line, create a new Ruby file called update-indicators.rb:</p>
+
+<code type="section">sudo vim update-indicators.rb</code>
+
+<p>The script in Listing 2 uses Ruby to update the dashboard's indicators through the CanaryBoard REST API:</p>
+
+
+<code type="section" width="100%">
+<heading refname="listing2" type="code">Listing 2. Ruby script to update the DevOps indicators</heading>
+#!/usr/bin/env ruby
+require 'net/http'
+require 'json'
+
+API_URL = URI.parse("http://<strong>localhost</strong>:3000/api")
+API_KEY = "<strong>changeme</strong>" #http://localhost:3000/profile
+ 
+def get url
+  request = Net::HTTP::Get.new(API_URL.path + url)
+  request["Content-Type"] = "application/json"
+  sock = Net::HTTP.new(API_URL.host, API_URL.port)
+  sock.read_timeout = 1000
+  result = sock.start { |http| http.request(request) }
+  JSON.parse(result.body, symbolize_names: true)
+end
+
+def post url, body = {}
+  request = Net::HTTP::Post.new(API_URL.path + url)
+  request.body = body.to_json
+  request["Content-Type"] = "application/json"
+  request["Authorization"] = "Token token=\"#{API_KEY}\""
+  sock = Net::HTTP.new(API_URL.host, API_URL.port)
+  sock.read_timeout = 1000
+  result = sock.start { |http| http.request(request) }
+  JSON.parse(result.body, symbolize_names: true)
+end
+
+# Getting the list of indicators and selecting the one we need
+indicator = get("/indicators").select { |ind| ind[:project][:name] == "Project 2" \\
+and ind[:service][:name] == "Service 2" }.first
+
+# Getting the list of possible statuses and selecting the one we need
+status = get("/statuses").select { |i| i[:name] == "yellow" }.first
+
+# Setting the status
+post "/indicators/#{indicator[:id]}/events", event: {
+  message: "This text is supposed to explain something",
+  status_id: status[:id]
+}
+</code>
+
+<p>Paste the contents of <a href="#listing2">Listing 2</a> into the update-indicators.rb file that you just created. Change the <code type="inline">API_KEY</code> value from <code type="inline">changeme</code> to the value that you got from the CanaryBoard profile page. If you're not running your server on localhost, change <code type="inline">localhost</code> to your server's location.  
+</p>
+
+<p>
+Use these commands (which assume that your set-indicators.rb and update-indicator.rb files are in the home directory on your instance) to run the Ruby programs:</p>
+
+<code type="section" width="100%">
+sudo ruby ~/canaryboard-set-indicators.rb
+sudo ruby ~/canaryboard-update-indicators.rb
+</code>
+
+
+
+
+<p>
+Go to https://localhost:3000/ (or equivalent) to see the results of the services and events that you created. When the code in <a href="#listing2">Listing 2</a> runs, it updates all of the events for the services that are listed in the script. By clicking on any indicator in the dashboard, you can see a history of these events. If you want this script to run with every code check-in, you can call it from your Continuous Integration server or run it through <code type="inline">cron</code> or another scheduling system. Figure 5 shows example results for the Deploy service:   
+</p>
+
+<figure>
+<heading alttoc="" refname="fig5" type="figure">Figure 5. Event log for the Deploy service indicator</heading>
+<img alt="Screen capture of a CanaryBoard page that shows a history of the events logged for the Deploy indicator. Each row contains a date- and time-stamped description of a event that's related to deployment." height="213" src="canaryboard_detail.jpg" width="580"/>
+</figure>
+
+<p><a href="#listing1">Listing 1</a> and <a href="#listing2">Listing 2</a> are hard-coded for specific services, but you can make all of the code dynamic.</p>
+
+<heading alttoc="" refname="" type="major">In conclusion</heading>
+<sidebar>
+<heading alttoc="" refname="" type="sidebar">Get involved</heading>
+<p>The developerWorks <a href="http://www.ibm.com/developerworks/agile/community.html">Agile transformation community</a> provides news, discussions, and training to help you and your organization build a foundation on agile development principles.</p>
+</sidebar>
+
+<p>
+In this article, the last in the <a href="http://www.ibm.com/developerworks/views/agile/libraryview.jsp?series_title_by=agile+devops"><em>Agile DevOps</em></a> series, you learned how to use the open source CanaryBoard tool to provide continuous feedback to all team members across development and operations. Many system- and application-monitoring tools provide a plethora of rich information that you can incorporate into DevOps dashboards to help engineers and others make more-informed decisions. 
+</p>
+
+<p>
+It's been a tremendous adventure sharing my experiences with you over the past several months. My goal with this series has been to show how and why to learn the best approaches and practices from teams and cultures that traditionally are completely different: development and operations.  I encourage you to view software as holistic, integrated systems <mdash/> not as something that gets "thrown over the wall" to another team in your organization. </p>
+
+</docbody>
+
+<resources>
+
+<resource resource-category="Learn">
+"<a href="http://www.ibm.com/developerworks/java/library/j-ap11146"><em>Automation for the people</em>: Continuous feedback</a>": (Paul Duvall, IBM developerWorks, November 2006): Receive immediate feedback with every source code change.</resource>
+
+<resource resource-category="Learn">
+<a href="https://github.com/stelligent/canaryboard/blob/master/script/api-usage-example">CanaryBoard REST API examples</a>: Ruby examples that access the CanaryBoard REST API.</resource>
+
+<resource resource-category="Learn">
+developerWorks <a href="https://www.ibm.com/developerworks/agile">Agile transformation</a> helps you and your organization build a foundation on agile development principles.</resource>
+
+<resource resource-category="Learn">Stay current with <a href="http://www.ibm.com/developerworks/offers/techbriefings/events.html"> developerWorks technical events and webcasts</a> focused on a variety of IBM products and IT industry topics.</resource>
+
+<resource resource-category="Learn">Attend a <a href="http://www.ibm.com/developerworks/offers/techbriefings/">free developerWorks Live! briefing</a> to get up-to-speed quickly on IBM products and tools as well as IT industry trends.</resource>
+
+<resource resource-category="Learn">Follow <a href="http://www.twitter.com/developerworks/">developerWorks on Twitter</a>.</resource>
+
+<resource resource-category="Learn">Watch <a href="http://www.ibm.com/developerworks/offers/lp/demos/">developerWorks on-demand demos</a> ranging from product installation and setup demos for beginners, to advanced functionality for experienced developers. </resource>
+
+<resource resource-category="Get products and technologies">
+<a href="https://github.com/stelligent/canaryboard">CanaryBoard</a>: CanaryBoard is an open source tool for displaying a software system's status by project/service and date.
+</resource>
+
+<resource resource-category="Get products and technologies">
+<a href="http://releases.ubuntu.com/precise/">Ubuntu</a>: Download version 12.04.2 LTS of Ubuntu.
+</resource>
+
+
+
+<resource resource-category="Get products and technologies">
+<a href="http://www.ibm.com/software/tivoli/products/prov-mgr/">IBM Tivoli Provisioning Manager</a>: Tivoli<reg/> Provisioning Manager enables a dynamic infrastructure by automating the management of physical servers, virtual servers, software, storage, and networks.
+</resource>
+
+<resource resource-category="Get products and technologies">
+<a href="http://www.ibm.com/software/tivoli/products/sys-auto-multi/">IBM Tivoli System Automation for Multiplatforms</a>: Tivoli System Automation for Multiplatforms provides high availability and automation for enterprise-wide applications and IT services.
+</resource>
+
+<resource resource-category="Get products and technologies">
+<a href="http://www.ibm.com/developerworks/downloads/">Evaluate IBM products</a> in the way that suits you best: Download a product trial, try a product online, use a product in a cloud environment, or spend a few hours in the <a href="http://www.ibm.com/developerworks/downloads/soasandbox/index.html"> SOA Sandbox</a> learning how to implement Service Oriented Architecture efficiently.
+</resource>
+
+<resource resource-category="Discuss"> Get involved in the <a href="http://www.ibm.com/developerworks/community/">developerWorks community</a>. Connect with other developerWorks users while exploring the developer-driven blogs, forums, groups, and wikis. </resource>
+
+<resource resource-category="Discuss">The developerWorks <a href="https://www.ibm.com/developerworks/mydeveloperworks/blogs/agile/entry/home1?lang=en">Agile transformation community</a> provides news, discussions, and training to help you and your organization build a foundation on agile development principles.</resource>
+
+
+</resources>
+</dw-article>
+<!-- PUB_TO_MAV --></dw-document>

@@ -58,6 +58,8 @@ For more information, you can read the [Agile DevOps: Build a DevOps dashboard](
 
 ## LICENSE
 
+The MIT License (MIT)
+
 Copyright (c) 2013 Stelligent Systems LLC
 
 Permission is hereby granted, free of charge, to any person obtaining a copy

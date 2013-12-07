@@ -8,8 +8,6 @@ gem 'bcrypt-ruby'
 
 gem 'mysql', '~> 2.9.1'
 gem 'mysql2', '~> 0.3.13'
-gem 'pg', '~> 0.17.0'
-
 
 group :assets do
   gem 'sass-rails', '~> 3.2.3'

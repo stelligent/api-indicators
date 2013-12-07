@@ -6,9 +6,6 @@ gem 'haml'
 gem 'jquery-rails'
 gem 'bcrypt-ruby'
 
-gem 'mysql', '~> 2.9.1'
-gem 'mysql2', '~> 0.3.13'
-
 group :assets do
   gem 'sass-rails', '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
@@ -25,7 +22,7 @@ group :test, :development do
   gem 'sqlite3'
 end
 
-group :production do
+#group :production do
   # Change this to use another DB in production
   gem 'sqlite3'
-end
+#end

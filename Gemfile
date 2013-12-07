@@ -5,6 +5,8 @@ gem 'rails', '3.2.13'
 gem 'haml'
 gem 'jquery-rails'
 gem 'bcrypt-ruby'
+gem 'mysql'
+gem 'mysql2'
 
 group :assets do
   gem 'sass-rails', '~> 3.2.3'

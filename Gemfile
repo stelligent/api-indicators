@@ -6,7 +6,6 @@ gem 'haml'
 gem 'jquery-rails'
 gem 'bcrypt-ruby'
 
-gem 'sqlite3', '~> 1.3.6'
 gem 'mysql', '~> 2.9.1'
 gem 'mysql2', '~> 0.3.13'
 gem 'pg', '~> 0.17.0'

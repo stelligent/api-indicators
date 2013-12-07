@@ -22,7 +22,7 @@ group :test, :development do
   gem 'sqlite3'
 end
 
-#group :production do
+group :production do
   # Change this to use another DB in production
   gem 'sqlite3'
-#end
+end

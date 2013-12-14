@@ -1,4 +1,4 @@
-api-indicators
+api-indicators [![Build Status](https://travis-ci.org/lacrosse/api-indicators.png?branch=master)](https://travis-ci.org/lacrosse/api-indicators)
 ==============
 
 ## Description

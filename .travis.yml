@@ -5,3 +5,4 @@ rvm:
   - ruby-head
 script:
   - RAILS_ENV=test bundle exec rake db:setup --trace
+  - bundle exec rake

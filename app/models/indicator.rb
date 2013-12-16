@@ -15,8 +15,7 @@ class Indicator < ActiveRecord::Base
     "#{project.name}: #{service.name}"
   end
 
-  # Gets current status of indicator.
-  def current_state
+  def current_event
     events.first
   end
 
@@ -24,28 +23,18 @@ class Indicator < ActiveRecord::Base
     events.count
   end
 
-  def get_history size = 10
+  def get_history(size = 10)
     events.limit size
   end
 
-  def set status, message = nil
+  def set(status, message = nil)
     events.create(
       status_id: Status.find_or_create_by_name(status).id,
       message: message
-      )
+    )
   end
 
-  def api_return_format
-    {
-      id: self.id,
-      project: self.project.api_return_format,
-      service: self.service.api_return_format,
-      current_event: self.current_state.api_return_format,
-      has_page: self.has_page
-    }
-  end
-
-private
+  private
 
   # Used in after_create callback.
   # Sets default state of every new indicator.

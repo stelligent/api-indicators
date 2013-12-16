@@ -1,25 +1,27 @@
 class Api::IndicatorsController < Api::BaseController
-  before_filter :get_indicator, only: [ :show, :update ]
+  before_filter :get_indicators, onle: :index
+  before_filter :get_indicator, only: [:show, :update]
 
-  # GET /api/indicators
   def index
-    respond_with Indicator.includes(:project, :service, :events).all.map(&:api_return_format)
+    respond_with @indicators
   end
 
-  # GET /api/indicators/:id
   def show
     respond_with @indicator
   end
 
-  # PUT /api/indicators/:id
   def update
     @indicator.update_attributes(params[:indicator])
     respond_with @indicator
   end
 
-private
+  private
+
+  def get_indicators
+    @indicators = Indicator.includes(:project, :service, :events).all
+  end
 
   def get_indicator
-    @indicator ||= Indicator.find(params[:id]) rescue render(nothing: true) and return
+    @indicator = Indicator.find_by_id(params[:id])
   end
 end

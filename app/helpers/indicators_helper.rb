@@ -1,7 +1,7 @@
 module IndicatorsHelper
   def status_button indicator
     color =
-      case indicator.current_state.status.name
+      case indicator.current_event.status.name
       when "green"
         "btn-success"
       when "yellow"
@@ -14,8 +14,8 @@ module IndicatorsHelper
 
     options = {
       :class => "indicator btn #{color}",
-      "data-title" => "#{indicator.current_state.created_at.strftime("%H:%M, %b %-d, %Y")}",
-      "data-content" => indicator.current_state.message || "No message"
+      "data-title" => "#{indicator.current_event.created_at.strftime("%H:%M, %b %-d, %Y")}",
+      "data-content" => indicator.current_event.message || "No message"
     }
 
     link_to_if indicator.has_page, "&nbsp;".html_safe, indicator_path(indicator), options do

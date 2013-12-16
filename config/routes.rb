@@ -1,16 +1,15 @@
 ApiIndicators::Application.routes.draw do
   namespace :api, defaults: { format: :json } do
-    resources :projects, only: [ :index, :create, :show, :update, :destroy ]
-    resources :services, only: [ :index, :create, :show, :update, :destroy ]
-    resources :indicators, only: [ :index, :show, :update ] do
-      resources :events, only: [ :index, :create, :show, :update, :destroy ]
+    resources :projects, except: [:new, :edit]
+    resources :services, except: [:new, :edit]
+    resources :indicators, only: [:index, :show, :update] do
+      resources :events, except: [:new, :edit]
     end
-    resources :statuses, only: [ :index ]
+    resources :statuses, only: :index
+    root to: "base#show"
   end
 
-  get "/api" => "api#show", as: "api_root"
-
-  resources :indicators, only: [ :show ]
+  resources :indicators, only: :show
 
   controller :sessions do
     get "login" => :new
@@ -18,9 +17,9 @@ ApiIndicators::Application.routes.draw do
     get "logout" => :destroy
   end
 
-  resource :profile, controller: :users, only: [ :show, :edit, :update ]
+  resource :profile, controller: :users, only: [:show, :edit, :update]
 
-  resource :docs, only: [ :show ]
+  resource :docs, only: :show
 
   root to: "indicators#index"
 

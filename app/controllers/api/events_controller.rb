@@ -1,31 +1,26 @@
-class Api::EventsController < ApiController
+class Api::EventsController < Api::BaseController
   before_filter :get_events
-  before_filter :get_event, only: [ :show, :update, :destroy ]
+  before_filter :get_event, only: [:show, :update, :destroy]
 
-  # GET /api/indicators/:indicator_id/events
   def index
-    respond_with @events.map(&:api_return_format)
+    respond_with @events
   end
 
-  # POST /api/indicators/:indicator_id/events
+  def show
+    respond_with @event
+  end
+
   def create
     @event = @events.new(params[:event])
     @event.save
     respond_with @event
   end
 
-  # GET /api/indicators/:indicator_id/events/:id
-  def show
-    respond_with @event
-  end
-
-  # PUT /api/indicators/:indicator_id/events/:id
   def update
     @event.update_attributes(params[:event])
     respond_with @event
   end
 
-  # DELETE /api/indicators/:indicator_id/events/:id
   def destroy
     @event.destroy
     respond_with @event
@@ -34,7 +29,7 @@ class Api::EventsController < ApiController
 private
 
   def get_events
-    @events ||= Indicator.find(params[:indicator_id]).events.includes(:status) rescue render(nothing: true) and return
+    @events = Indicator.find(params[:indicator_id]).events.includes(:status) rescue render(nothing: true) and return
   end
 
   def get_event

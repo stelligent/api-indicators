@@ -1,4 +1,4 @@
-class Api::IndicatorsController < ApiController
+class Api::IndicatorsController < Api::BaseController
   before_filter :get_indicator, only: [ :show, :update ]
 
   # GET /api/indicators

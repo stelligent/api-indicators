@@ -1,4 +1,4 @@
-class Api::ProjectsController < ApiController
+class Api::ProjectsController < Api::BaseController
   before_filter :get_projects, only: :index
   before_filter :get_project, only: [:show, :update, :destroy]
 

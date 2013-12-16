@@ -1,4 +1,4 @@
-class Api::StatusesController < ApiController
+class Api::StatusesController < Api::BaseController
   def index
     respond_with Status.all
   end

@@ -1,4 +1,4 @@
-class Api::ServicesController < ApiController
+class Api::ServicesController < Api::BaseController
   before_filter :get_services, only: :index
   before_filter :get_service, only: [:show, :update, :destroy]
 

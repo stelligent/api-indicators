@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ApiController do
+describe Api::BaseController do
   describe "GET #show" do
     it "returns ok status" do
       get :show

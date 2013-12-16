@@ -1,6 +1,8 @@
 api-indicators
 ==============
 
+## API docs and usage example are currently outdated
+
 ## Description
 
 This app lets you inform people about the status of services you provide and projects you're responsible for. Clean installation has a superuser account with ```admin:admin``` credentials, be sure to change it after first login.

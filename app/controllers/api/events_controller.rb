@@ -26,13 +26,14 @@ class Api::EventsController < Api::BaseController
     respond_with @event
   end
 
-private
+  private
 
   def get_events
-    @events = Indicator.find(params[:indicator_id]).events.includes(:status) rescue render(nothing: true) and return
+    @indicator = Indicator.find_by_id(params[:indicator_id])
+    @events = @indicator.events.includes(:status) if @indicator
   end
 
   def get_event
-    @event ||= @events.find(params[:id]) rescue render(nothing: true) and return
+    @event = @events.find_by_id(params[:id]) if @events
   end
 end

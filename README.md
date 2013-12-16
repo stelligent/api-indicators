@@ -1,4 +1,4 @@
-api-indicators [![Build Status](https://travis-ci.org/lacrosse/api-indicators.png?branch=master)](https://travis-ci.org/lacrosse/api-indicators)
+api-indicators [![Build Status](https://travis-ci.org/lacrosse/api-indicators.png?branch=master)](https://travis-ci.org/lacrosse/api-indicators) [![Coverage Status](https://coveralls.io/repos/lacrosse/api-indicators/badge.png)](https://coveralls.io/r/lacrosse/api-indicators)
 ==============
 
 ## API docs and usage example are currently outdated

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130509125524) do
+ActiveRecord::Schema.define(:version => 20131214181123) do
 
   create_table "events", :force => true do |t|
     t.integer  "indicator_id"
@@ -52,5 +52,7 @@ ActiveRecord::Schema.define(:version => 20130509125524) do
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
   end
+
+  add_index "users", ["api_key"], :name => "index_users_on_api_key", :unique => true
 
 end

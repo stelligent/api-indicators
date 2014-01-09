@@ -1,7 +1,7 @@
 class Indicator < ActiveRecord::Base
   DISPLAYED_HISTORY_SIZE = 20
 
-  attr_accessible :service_id, :project_id, :has_page
+  attr_accessible :service_id, :project_id, :custom_url
 
   belongs_to :service
   belongs_to :project
@@ -41,7 +41,7 @@ class Indicator < ActiveRecord::Base
       project: self.project.api_return_format,
       service: self.service.api_return_format,
       current_event: self.current_state.api_return_format,
-      has_page: self.has_page
+      custom_url: self.custom_url
     }
   end
 

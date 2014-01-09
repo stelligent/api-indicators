@@ -1,5 +1,5 @@
 module IndicatorsHelper
-  def status_button indicator
+  def status_button(indicator)
     color =
       case indicator.current_state.status.name
       when "green"
@@ -8,22 +8,20 @@ module IndicatorsHelper
         "btn-warning"
       when "red"
         "btn-danger"
-      else
-        ""
       end
 
     options = {
-      :class => "indicator btn #{color}",
-      "data-title" => "#{indicator.current_state.created_at.strftime("%H:%M, %b %-d, %Y")}",
-      "data-content" => indicator.current_state.message || "No message"
+      class: ["indicator", "btn", color].compact.join(" "),
+      data: {
+        title: "#{indicator.current_state.created_at.strftime("%H:%M, %b %-d, %Y")}",
+        content: indicator.current_state.message || "No message"
+      }
     }
 
-    link_to_if indicator.has_page, "&nbsp;".html_safe, indicator_path(indicator), options do
-      content_tag :a, "&nbsp;".html_safe, options
-    end
+    link_to "&nbsp;".html_safe, indicator_path(indicator), options
   end
 
-  def history_row event
+  def history_row(event)
     color =
       case event.status.name
       when "green"

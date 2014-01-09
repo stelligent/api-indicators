@@ -45,8 +45,8 @@
         %td current_event.message
         %td The message explaining current event
       %tr
-        %td has_page
-        %td Whether or not the indicator has its own page
+        %td custom_url
+        %td The URL to redirect to instead of loading indicator's own page (can be relative or absolute)
   %h4 Instance Resource
   %pre.prettyprint
     = preserve do
@@ -72,7 +72,7 @@
             },
             "message": {string}
           },
-          "has_page": {boolean}
+          "custom_url": {string}
         }
   %h4 List Resource
   %pre.prettyprint
@@ -114,7 +114,7 @@
       :escaped
         {
           "indicator": {
-            "has_page": {boolean}
+            "custom_url": {string}
           }
         }
   %h4 Response

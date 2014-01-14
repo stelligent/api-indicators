@@ -20,6 +20,7 @@
                 %li= link_to "Log in", login_path
               - else
                 %li= link_to "Profile", profile_path
+                %li= link_to "Users", users_path
                 %li= link_to "API", docs_path
                 %li= link_to "Log out", logout_path
     .container{style:"margin: 20px auto;"}= yield

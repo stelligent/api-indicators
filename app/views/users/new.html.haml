@@ -1,0 +1,14 @@
+- title "New user"
+
+%h3 New user
+
+= form_for @user do |f|
+  %table
+    %tr
+      %td= f.label :name, "Username"
+      %td= f.text_field :name
+    %tr
+      %td= f.label :password, "Password (they will be able to change it)"
+      %td= f.password_field :password
+    %tr
+      %td{colspan: 2}= f.submit "Create", class: "btn btn-primary btn-block"

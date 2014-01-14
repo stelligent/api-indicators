@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
-
   attr_accessible :name, :password, :password_confirmation
+
   has_secure_password
 
   before_create :generate_api_token
@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :name, case_sensitive: false
   validates_presence_of :password
 
-private
+  private
 
   def generate_api_token
     require 'securerandom'

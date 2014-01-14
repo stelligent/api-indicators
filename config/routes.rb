@@ -18,9 +18,11 @@ ApiIndicators::Application.routes.draw do
     get "logout" => :destroy
   end
 
-  resource :profile, controller: :users, only: [ :show, :edit, :update ]
+  resource :profile, controller: :users, only: [:show, :edit, :update]
 
-  resource :docs, only: [ :show ]
+  resources :users, controller: :users, only: [:index, :new, :create]
+
+  resource :docs, only: :show
 
   root to: "indicators#index"
 

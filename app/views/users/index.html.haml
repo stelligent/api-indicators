@@ -1,0 +1,17 @@
+- title "Users"
+
+%h3
+  Users
+  %small= link_to "Create another", new_user_path
+
+%table.table{style:"width: auto;"}
+  %tbody
+    %thead
+      %tr
+        %th Username
+        %th Created
+    %tbody
+      - @users.each do |user|
+        %tr
+          %td= user.name
+          %td= user.created_at.to_formatted_s(:long)

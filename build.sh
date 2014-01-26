@@ -2,6 +2,7 @@
 
 # For some reason, the Jenkins user doesn't have the path configured correctly...
 PATH=$PATH:/usr/local/bin/
+echo path: $PATH
 
 # check the syntax of each ruby file
 echo Syntax check...

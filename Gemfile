@@ -7,6 +7,7 @@ gem 'jquery-rails'
 gem 'bcrypt-ruby'
 gem 'aws-sdk-core', '~> 2.0.0.rc1'
 gem 'trollop'
+gem ‘opendelivery’
 
 group :assets do
   gem 'sass-rails', '~> 3.2.3'

@@ -9,6 +9,7 @@ gem 'aws-sdk-core', '~> 2.0.0.rc1'
 gem 'trollop'
 gem 'opendelivery'
 gem 'aws-sdk'
+gem 'encrypto_signo'
 
 group :assets do
   gem 'sass-rails', '~> 3.2.3'

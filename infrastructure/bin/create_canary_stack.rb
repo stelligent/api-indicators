@@ -1,3 +1,5 @@
+STDOUT.sync = true
+
 require 'aws-sdk-core'
 require 'trollop'
 

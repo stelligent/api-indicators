@@ -16,3 +16,5 @@
 
 # ignore the stackid file
 /infrastructure/stackid
+/infrastructure/ops_stackid
+/infrastructure/cfn_stackname

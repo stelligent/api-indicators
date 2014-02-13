@@ -166,3 +166,5 @@ instance = ops.create_instance instance_params
 
 # start the instance and if the start command succeeds, we're good. It'll take a good while for the instance to boot up, tho.
 ops.start_instance instance_id: instance.instance_id
+
+File.open("./stackid", 'w') { |file| file.write(stack.stack_id) }

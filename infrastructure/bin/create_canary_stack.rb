@@ -72,6 +72,8 @@ Aws.config = { region: aws_region, http_wire_trace: false }
 cfn_stack_name = "CanaryBoard-Supporting-Resources-#{@timestamp}"
 @cfn.create_stack stack_name: cfn_stack_name, template_body: File.open("./conf/canary_board_resources.template", "rb").read, capabilities: ["CAPABILITY_IAM"], timeout_in_minutes: 10
 
+File.open("./cfn_stackname", 'w') { |file| file.write(cfn_stack_name) }
+
 print_and_flush "creating required resources"
 while (stack_in_progress cfn_stack_name)
   print_and_flush "."
@@ -191,4 +193,4 @@ instance = ops.create_instance instance_params
 # start the instance and if the start command succeeds, we're good. It'll take a good while for the instance to boot up, tho.
 ops.start_instance instance_id: instance.instance_id
 
-File.open("./stackid", 'w') { |file| file.write(stack.stack_id) }
+File.open("./ops_stackid", 'w') { |file| file.write(stack.stack_id) }

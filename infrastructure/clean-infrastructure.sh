@@ -1,0 +1,1 @@
+ruby bin/destroy_stack.rb --stackid `cat ops_stackid`

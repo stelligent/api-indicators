@@ -24,49 +24,73 @@ STDOUT.sync = true
 
 require 'opendelivery'
 require 'trollop'
+require 'aws-sdk-core'
+
+SUCCESS_STATUSES = %w{ online }
+PENDING_STATUSES = %w{ booting pending rebooting requested running_setup shutting_down terminating }
+FAILURE_STATUSES = %w{ connection_lost setup_failed start_failed stopped terminated }
+
+@opsworks_client = Aws::OpsWorks.new region: "us-east-1"
+
+def all_instances_online? stack_id
+  result = true
+  response = @opsworks_client.describe_instances(:stack_id => stack_id)
+  response[:instances].each do |instance|
+    unless SUCCESS_STATUSES.include? instance.status
+      result = false
+      break
+    end 
+  end
+  result
+end
+
+def any_instances_pending? stack_id
+  result = false
+  response = @opsworks_client.describe_instances(:stack_id => stack_id)
+  response[:instances].each do |instance|
+    if PENDING_STATUSES.include? instance.status
+      result = true
+      break
+    end 
+  end
+  result
+end
+
+def all_instances_stopped? stack_id
+  result = true
+  response = @opsworks_client.describe_instances(:stack_id => stack_id)
+  response[:instances].each do |instance|
+    unless FAILURE_STATUSES.include? instance.status
+      result = false
+      break
+    end 
+  end
+  result
+end
+
+def print_and_flush(str)
+  print str
+  $stdout.flush
+end
+
 
 opts = Trollop::options do
   opt :region, 'The AWS region to use', :type => String, :default => "us-west-2"
   opt :stackid, 'the OpsWorks stack id to monitor', :type => String, :required => true
 end
 
-def wait_on_all_configures(stack_id)
-  opsworks_client = AWS::OpsWorks::Client::V20130218.new
-  response = opsworks_client.describe_instances(:stack_id => stack_id)
-  response[:instances].each do |instance|
-    wait_on_configure(instance[:instance_id])
-  end
+
+print_and_flush "waiting for all instances in stack #{opts[:stackid]} to come up..."
+while (any_instances_pending? opts[:stackid])
+  sleep 10
+  print_and_flush "."
+end
+puts
+
+exitcode = 0
+unless all_instances_online? opts[:stackid]
+  puts "Stack failed to launch!"
+  exitcode = 1
 end
 
-def wait_on_configure(instance_id)
-  opsworks_client = AWS::OpsWorks::Client::V20130218.new
-
-  max_attempts = 250
-  num_attempts = 0
-
-  while true
-    response = opsworks_client.describe_commands(:instance_id => instance_id)
-    configure_command = response[:commands].find { |command| command[:type] == 'configure' }
-
-    configure_status(configure_command)
-
-    unless configure_command.nil?
-      if configure_command[:status] == 'successful'
-        return
-      elsif configure_command[:status] == 'failed'
-        raise 'configure failed'
-      end
-    end
-    num_attempts += 1
-    if num_attempts >= max_attempts
-      raise 'stuck waiting on configure command max attempts'
-    end
-    sleep 10
-  end
-end
-
-def configure_status(configure_command)
-    puts "Configure command: #{configure_command}"
-end
-
-wait_on_all_configures opts[:stackid]
+exit exitcode

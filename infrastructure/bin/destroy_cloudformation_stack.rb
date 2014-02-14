@@ -27,25 +27,6 @@ require 'trollop'
 require 'aws-sdk-core'
 
 @sleeptime = 10
-@cfn = Aws::CloudFormation.new region: opts[:region]
-
-def print_and_flush(str)
-  print str
-  $stdout.flush
-end
-
-def does_cfn_stack_exist? stackname
-  result = true
-  begin
-    @cfn.describe_stacks stack_name: stackname
-  rescue
-    result = false
-  end
-end
-
-def delete_cfn_stack stackname
-  @cfn.delete_stack stack_name: stackname
-end
 
 
 opts = Trollop::options do
@@ -53,7 +34,32 @@ opts = Trollop::options do
   opt :stackname, 'the OpsWorks stack id to destroy', :type => String, :required => true
 end
 
+@cfn = Aws::CloudFormation.new region: opts[:region]
+
+def print_and_flush(str)
+  print str
+  $stdout.flush
+end
+
+def does_cfn_stack_exist? stackname, quiet = false
+  result = true
+  begin
+    @cfn.describe_stacks stack_name: stackname
+  rescue Aws::CloudFormation::Errors::ValidationError
+    unless quiet then puts "Stack #{stackname} not found!" end
+    result = false
+  end
+  result
+end
+
+def delete_cfn_stack stackname
+  @cfn.delete_stack stack_name: stackname
+end
 
 if does_cfn_stack_exist? opts[:stackname]
-  delete_cfn_stack opts[:stack]
+  print_and_flush "deleting stack..."
+  delete_cfn_stack opts[:stackname]
+  while (does_cfn_stack_exist? opts[:stackname], true)
+    print_and_flush "."
+  end
 end

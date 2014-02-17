@@ -8,7 +8,7 @@ gem 'bcrypt-ruby'
 gem 'aws-sdk-core', '~> 2.0.0.rc1'
 gem 'trollop'
 gem 'opendelivery'
-gem 'aws-sdk'
+gem 'aws-sdk', '1.16.0'
 gem 'encrypto_signo'
 
 group :assets do

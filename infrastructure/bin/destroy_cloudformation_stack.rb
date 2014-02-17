@@ -57,9 +57,10 @@ def delete_cfn_stack stackname
 end
 
 if does_cfn_stack_exist? opts[:stackname]
-  print_and_flush "deleting stack..."
+  print_and_flush "deleting cloudformation stack #{opts[:stackname]}..."
   delete_cfn_stack opts[:stackname]
   while (does_cfn_stack_exist? opts[:stackname], true)
     print_and_flush "."
   end
+  puts
 end

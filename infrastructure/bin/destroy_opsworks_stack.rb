@@ -31,9 +31,8 @@ require 'aws-sdk-core'
 
 def print_and_flush(str)
   print str
-  $stdout.flush
+  STDOUT.flush
 end
-
 
 opts = Trollop::options do
   opt :region, 'The AWS region to use', :type => String, :default => "us-west-2"

@@ -70,7 +70,7 @@ end
 
 def print_and_flush(str)
   print str
-  $stdout.flush
+  STDOUT.flush
 end
 
 

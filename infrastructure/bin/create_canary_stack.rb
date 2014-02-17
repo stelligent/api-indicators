@@ -43,7 +43,7 @@ end
 # used to print status without newlines
 def print_and_flush(str)
   print str
-  $stdout.flush
+  STDOUT.flush
 end
 
 # using trollop to do command line options

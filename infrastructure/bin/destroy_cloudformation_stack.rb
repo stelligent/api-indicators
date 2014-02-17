@@ -38,7 +38,7 @@ end
 
 def print_and_flush(str)
   print str
-  $stdout.flush
+  STDOUT.flush
 end
 
 def does_cfn_stack_exist? stackname, quiet = false

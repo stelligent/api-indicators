@@ -182,6 +182,7 @@ instance_params =     {
       layer_ids: [layer.layer_id],
       instance_type: instance_type,
       hostname: "canaryboard",
+      ssh_key_name: "jonny-labs-west2",
       :root_device_type => 'ebs',
       :architecture => 'x86_64'
     }

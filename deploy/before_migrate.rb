@@ -1,1 +1,1 @@
-run "bundle exec rake db:setup"
+# run "bundle exec rake db:setup"

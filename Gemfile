@@ -11,6 +11,7 @@ gem 'opendelivery'
 gem 'aws-sdk', '1.16.0'
 gem 'encrypto_signo'
 gem 'activerecord-mysql-adapter'
+gem 'mysql2'
 
 group :assets do
   gem 'sass-rails', '~> 3.2.3'

@@ -12,6 +12,7 @@ gem 'aws-sdk', '1.16.0'
 gem 'encrypto_signo'
 gem 'activerecord-mysql-adapter'
 gem 'mysql2'
+gem 'pg'
 
 group :assets do
   gem 'sass-rails', '~> 3.2.3'

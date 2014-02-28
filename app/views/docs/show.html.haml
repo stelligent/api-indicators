@@ -5,14 +5,9 @@
     %h1
       %a{name:"top"}
       REST API Documentation
-    %p
-      Every method accepts requests with body in JSON format. Relevant HTTP header is
-      %code Content-Type: application/json
-    %p
-      %i.icon-warning-sign
-      symbol near method's name in this documentation means that method requires token authentication with HTTP header, e.g.
-      %code Authorization: Token token="<api_key>"
-      (replace <api_key> with your own API key)
+    :erb
+      <p>Every method accepts requests with body in JSON format. Relevant HTTP header is <code>Content-Type: application/json</code>.
+      <p>Every method requires token authentication with HTTP header, e.g. <code>Authorization: Token token="&lt;api_key&gt;"</code>.
 
     - @resources.each do |resource|
       = render partial: resource[0]
@@ -20,9 +15,8 @@
     .well.well-small
       %ul.nav.nav-list
         - @resources.each do |resource|
-          %li.nav-header= resource[0].titleize
+          %li.nav-header= resource[0].capitalize
           - resource[1].each do |action|
-            %li
-              %a{href:"##{resource[0]}-#{action}"}
-                = action.titleize
-                = '<i class="icon-warning-sign pull-right" title="This method requires authentication"></i>'.html_safe if %w{create update delete}.include? action
+            %li= link_to action.capitalize, "##{resource[0]}-#{action}"
+
+= javascript_include_tag "//google-code-prettify.googlecode.com/svn/loader/run_prettify.js"

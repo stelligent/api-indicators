@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  before_filter :authorize, only: [ :destroy ]
+  skip_before_filter :authorize, except: :destroy
 
   def new
   end

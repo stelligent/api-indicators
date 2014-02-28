@@ -1,13 +1,12 @@
-class ApiController < ApplicationController
-  skip_before_filter :verify_authenticity_token
-  before_filter :restrict_api_access, except: [ :index, :show ]
+class ApiController < ActionController::Base
+  before_filter :restrict_api_access, except: [:index, :show]
 
   def show
     response = { server_time: Time.now.to_i, ok: true }
     respond_ok response
   end
 
-private
+  private
 
   def respond_with response
     if response.respond_to?(:errors) and response.errors.present?
@@ -17,10 +16,7 @@ private
     else
       respond_ok response
     end
-    return
   end
-
-private
 
   def respond_ok response
     render json: response
@@ -31,8 +27,6 @@ private
   end
 
   def restrict_api_access
-    authenticate_or_request_with_http_token do |token, options|
-      User.exists?(api_key: token)
-    end
+    authenticate_or_request_with_http_token{ |token, options| User.exists?(api_key: token) }
   end
 end

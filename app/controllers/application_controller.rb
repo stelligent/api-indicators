@@ -2,14 +2,12 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   helper_method :current_user
 
-private
+  before_filter :authorize
+
+  private
+
   def authorize
-    if current_user
-      true
-    else
-      redirect_to root_path
-      false
-    end
+    current_user || redirect_to(login_path)
   end
 
   def current_user

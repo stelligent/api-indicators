@@ -26,5 +26,9 @@
     .container{style:"margin: 20px auto;"}= yield
     %footer.footer
       .container
-        Powered by
-        = image_tag "logo_stelligent.png", alt: "stelligent", title: "stelligent"
+        .pull-left
+          Powered by
+          = image_tag "logo_stelligent.png", alt: "stelligent", title: "stelligent"
+        .pull-right
+          Running revision:
+          = link_to DEPLOYED_HEAD[0...7], "https://github.com/stelligent/canaryboard/commit/#{DEPLOYED_HEAD}"

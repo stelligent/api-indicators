@@ -1,0 +1,16 @@
+- title "Organizations"
+
+%h3
+  Organizations
+  %small= link_to "Create another", new_organization_path
+%table.table
+  %tbody
+    %thead
+      %tr
+        %th Name
+        %th Created
+    %tbody
+      - @organizations.each do |organization|
+        %tr
+          %td= link_to organization.name, organization_path(organization)
+          %td= organization.created_at.to_s(:long)

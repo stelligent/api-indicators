@@ -1,5 +1,5 @@
 class ApiController < ActionController::Base
-  before_filter :restrict_api_access, except: [:index, :show]
+  before_filter :restrict_api_access
 
   def show
     response = { server_time: Time.now.to_i, ok: true }
@@ -27,6 +27,19 @@ class ApiController < ActionController::Base
   end
 
   def restrict_api_access
-    authenticate_or_request_with_http_token{ |token, options| User.exists?(api_key: token) }
+    authenticate_or_request_with_http_token{ |api_key, options| @current_user = User.find_by_api_key(api_key) }
+  end
+
+  def current_user
+    @current_user
+  end
+
+  def available_projects
+    @available_projects ||=
+      if current_user.admin?
+        Project.pluck(:id)
+      else
+        current_user.organization.projects.pluck(:id)
+      end
   end
 end

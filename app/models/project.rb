@@ -3,6 +3,7 @@ class Project < ActiveRecord::Base
 
   has_many :indicators, dependent: :destroy
   has_many :events, through: :indicators
+  has_and_belongs_to_many :organizations
 
   validates :name, presence: true, uniqueness: true
 

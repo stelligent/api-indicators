@@ -1,9 +1,15 @@
 require 'spec_helper'
 
 describe "Indicator pages" do
+  let(:user) { FactoryGirl.create(:user) }
   let(:service) { FactoryGirl.create(:service) }
   let(:project) { FactoryGirl.create(:project) }
   let!(:indicator) { service.indicators.find_by_project_id(project.id) }
+
+  before do
+    user.organization.projects << project
+    sign_in(user)
+  end
 
   subject { page }
 

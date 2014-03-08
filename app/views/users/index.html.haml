@@ -3,15 +3,23 @@
 %h3
   Users
   %small= link_to "Create another", new_user_path
-
-%table.table{style:"width: auto;"}
+%table.table
   %tbody
     %thead
       %tr
         %th Username
+        %th Organization
         %th Created
     %tbody
       - @users.each do |user|
         %tr
-          %td= user.name
+          %td
+            - if user == current_user
+              .label you
+            - if user.admin?
+              .label.label-success admin
+            = link_to user.name, user_path(user)
+          %td
+            - if user.organization
+              = link_to user.organization.name, organization_path(user.organization)
           %td= user.created_at.to_formatted_s(:long)

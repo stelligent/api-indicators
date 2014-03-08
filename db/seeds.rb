@@ -2,4 +2,4 @@
   Status.create(name: color)
 end
 
-User.create(name: "admin", password: "admin")
+User.create(name: "admin", password: "admin", admin: true)

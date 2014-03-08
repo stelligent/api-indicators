@@ -3,7 +3,7 @@ class Api::ProjectsController < ApiController
 
   # GET /api/projects
   def index
-    respond_with Project.all.map(&:api_return_format)
+    respond_with Project.where(project_id: available_projects).all.map(&:api_return_format)
   end
 
   # POST /api/projects
@@ -30,9 +30,12 @@ class Api::ProjectsController < ApiController
     respond_with @project
   end
 
-private
+  private
 
   def get_project
-    @project ||= Project.find(params[:id]) rescue render(nothing: true) and return
+    @project ||= Project.find(params[:id])
+    raise unless available_projects.include?(@project.id)
+  rescue
+    render(nothing: true) and return
   end
 end

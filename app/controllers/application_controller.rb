@@ -13,4 +13,13 @@ class ApplicationController < ActionController::Base
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
+
+  def available_projects
+    @available_projects ||=
+      if current_user.admin?
+        Project.pluck(:id)
+      else
+        current_user.organization.projects.pluck(:id)
+      end
+  end
 end

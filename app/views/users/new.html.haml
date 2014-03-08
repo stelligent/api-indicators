@@ -8,6 +8,9 @@
       %td= f.label :name, "Username"
       %td= f.text_field :name
     %tr
+      %td= f.label :organization_id
+      %td= f.select :organization_id, options_for_select(Organization.all.map{ |o| [o.name, o.id] })
+    %tr
       %td= f.label :password, "Password (they will be able to change it)"
       %td= f.password_field :password
     %tr

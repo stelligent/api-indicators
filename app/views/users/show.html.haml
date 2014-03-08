@@ -1,14 +1,19 @@
-- title "Profile"
+- title "User"
 
 %h3
-  Your profile
-  %small= link_to "Edit", edit_profile_path
+  User
+  %small= link_to "Edit", edit_user_path(@user)
 
 %table.table{style:"width: auto;"}
   %tbody
     %tr
       %td Username
-      %td= current_user.name
-    %tr
-      %td API Key
-      %td= current_user.api_key
+      %td= @user.name
+    - if @user.organization
+      %tr
+        %td Organization
+        %td= link_to @user.organization.name, organization_path(@user.organization)
+    - if current_user == @user
+      %tr
+        %td API Key
+        %td= @user.api_key

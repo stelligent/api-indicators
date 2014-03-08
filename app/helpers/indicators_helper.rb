@@ -34,11 +34,8 @@ module IndicatorsHelper
         ""
       end
 
-    content_tag :tr,
-      content_tag(:td,
-        content_tag(:i, event.created_at)
-      ) +
-      content_tag(:td, event.message || "No message"),
-      class: color
+    content_tag :tr, class: color do
+      content_tag(:td, content_tag(:i, event.created_at)) + content_tag(:td, event.message || "No message")
+    end
   end
 end

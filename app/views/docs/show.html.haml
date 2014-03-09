@@ -7,7 +7,7 @@
       REST API Documentation
     :erb
       <p>Every method accepts requests with body in JSON format. Relevant HTTP header is <code>Content-Type: application/json</code>.
-      <p>Every method requires token authentication with HTTP header, e.g. <code>Authorization: Token token="&lt;api_key&gt;"</code>.
+      <p>Every method requires token authentication with HTTP header, e.g. <code>Authorization: Token token="api_key"</code>.
 
     - @resources.each do |resource|
       = render partial: resource[0]

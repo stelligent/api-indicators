@@ -29,14 +29,30 @@ describe Api::IndicatorsController do
   end
 
   describe "authorized" do
-    let(:user) { FactoryGirl.create(:user) }
+    let(:user) { FactoryGirl.create(user_type) }
 
     before { request.env["HTTP_AUTHORIZATION"] = ActionController::HttpAuthentication::Token.encode_credentials(user.api_key) }
 
-    describe "PUT #update" do
-      it "updates and returns an indicator" do
-        put :update, id: indicator.id, indicator: { custom_url: "http://localhost:3000" }
-        expect(response).to be_success
+    context "as user" do
+      let(:user_type) { :user }
+
+      describe "PUT #update" do
+        it "does nothing" do
+          put :update, id: indicator.id, indicator: { custom_url: "http://localhost:3000" }
+          expect(response.body).to eq(" ")
+        end
+      end
+    end
+
+    context "as admin" do
+      let(:user_type) { :admin }
+
+      describe "PUT #update" do
+        it "updates" do
+          put :update, id: indicator.id, indicator: { custom_url: "http://localhost:3000" }
+          expect(response).to be_successful
+          expect(indicator.reload.custom_url).to eq("http://localhost:3000")
+        end
       end
     end
   end

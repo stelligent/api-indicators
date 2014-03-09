@@ -1,5 +1,6 @@
 class ApiController < ActionController::Base
   before_filter :restrict_api_access
+  before_filter :authorize_admin, except: [:index, :show]
 
   def show
     response = { server_time: Time.now.to_i, ok: true }
@@ -41,5 +42,11 @@ class ApiController < ActionController::Base
       else
         current_user.organization.projects.pluck(:id)
       end
+  end
+
+  def authorize_admin
+    raise unless current_user.admin?
+  rescue
+    render(nothing: true) and return
   end
 end

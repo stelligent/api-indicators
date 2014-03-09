@@ -1,5 +1,5 @@
 class Api::ServicesController < ApiController
-  before_filter :get_service, only: [ :show, :update, :destroy ]
+  before_filter :get_service, only: [:show, :update, :destroy]
 
   # GET /api/services
   def index
@@ -30,7 +30,7 @@ class Api::ServicesController < ApiController
     respond_with @service
   end
 
-private
+  private
 
   def get_service
     @service ||= Service.find(params[:id]) rescue render(nothing: true) and return

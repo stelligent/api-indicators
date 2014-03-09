@@ -33,7 +33,7 @@ describe "Login pages" do
       end
 
       it { should have_title "Status | User" }
-      it { should have_link "Profile", href: user_path(user) }
+      it { should have_link "My Profile", href: user_path(user) }
       it { should have_link "API", href: docs_path }
       it { should have_link "Log Out", href: logout_path }
       it { should have_link "Edit", href: edit_user_path(user) }

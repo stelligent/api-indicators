@@ -53,7 +53,7 @@ class UsersController < ApplicationController
 
   def sanitize_params
     unless current_user.admin?
-      params[:user].delete(:organization_id)
+      params[:user].delete(:organization_id, :admin)
     end
   end
 end

@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  before_filter :authorize, only: [ :destroy ]
+  skip_before_filter :authorize, except: :destroy
 
   def new
   end
@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
   def create
     if user = User.find_by_name(params[:name]) and user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect_to profile_path
+      redirect_to user_path(user)
     else
       flash.now.alert = "Invalid name or password"
       render :new

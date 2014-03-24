@@ -1,13 +1,13 @@
-class ApiController < ApplicationController
-  skip_before_filter :verify_authenticity_token
-  before_filter :restrict_api_access, except: [ :index, :show ]
+class ApiController < ActionController::Base
+  before_filter :restrict_api_access
+  before_filter :authorize_admin, except: [:index, :show]
 
   def show
     response = { server_time: Time.now.to_i, ok: true }
     respond_ok response
   end
 
-private
+  private
 
   def respond_with response
     if response.respond_to?(:errors) and response.errors.present?
@@ -17,10 +17,7 @@ private
     else
       respond_ok response
     end
-    return
   end
-
-private
 
   def respond_ok response
     render json: response
@@ -31,8 +28,25 @@ private
   end
 
   def restrict_api_access
-    authenticate_or_request_with_http_token do |token, options|
-      User.exists?(api_key: token)
-    end
+    authenticate_or_request_with_http_token{ |api_key, options| @current_user = User.find_by_api_key(api_key) }
+  end
+
+  def current_user
+    @current_user
+  end
+
+  def available_projects
+    @available_projects ||=
+      if current_user.admin?
+        Project.pluck(:id)
+      else
+        current_user.organization.projects.pluck(:id)
+      end
+  end
+
+  def authorize_admin
+    raise unless current_user.admin?
+  rescue
+    render(nothing: true) and return
   end
 end

@@ -1,7 +1,8 @@
 source 'https://rubygems.org'
 ruby '1.9.3'
 
-gem 'rails', '3.2.13'
+gem 'rails', '~> 3.2.17'
+
 gem 'haml'
 gem 'jquery-rails'
 gem 'bcrypt-ruby'
@@ -10,9 +11,7 @@ gem 'trollop'
 gem 'opendelivery'
 gem 'aws-sdk', '1.16.0'
 gem 'encrypto_signo'
-gem 'activerecord-mysql-adapter'
-gem 'mysql2'
-gem 'pg'
+gem 'rugged', github: 'libgit2/rugged', branch: 'development', submodules: true
 
 group :assets do
   gem 'sass-rails', '~> 3.2.3'
@@ -24,6 +23,7 @@ end
 group :test do
   gem 'capybara'
   gem 'factory_girl_rails', require: false
+  gem 'fivemat'
 end
 
 group :test, :development do

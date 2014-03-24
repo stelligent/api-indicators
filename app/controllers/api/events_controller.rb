@@ -34,7 +34,11 @@ class Api::EventsController < ApiController
 private
 
   def get_events
-    @events ||= Indicator.find(params[:indicator_id]).events.includes(:status) rescue render(nothing: true) and return
+    @indicator ||= Indicator.find(params[:indicator_id])
+    raise unless available_projects.include?(@indicator.project_id)
+    @events ||= @indicator.events.includes(:status)
+  rescue
+    render(nothing: true) and return
   end
 
   def get_event

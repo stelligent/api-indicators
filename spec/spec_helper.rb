@@ -4,7 +4,6 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'capybara/rspec'
 require 'rspec/autorun'
-require "#{Rails.root}/db/seeds.rb"
 require 'factory_girl_rails'
 
 # Requires supporting ruby files with custom matchers and macros, etc,

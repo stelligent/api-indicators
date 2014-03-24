@@ -1,14 +1,17 @@
-- title "Edit profile"
+- title "Editing user"
 
 %h3
-  Edit your profile
-  %small= link_to "Back", profile_path
+  Editing user
+  %small= link_to "Back", user_path(@user)
 
-= form_for current_user, url: profile_path, method: :put do |f|
+= form_for @user, url: user_path(@user), method: :put do |f|
   %table
     %tr
       %td= label_tag :name, "Username"
-      %td= text_field_tag nil, current_user.name, disabled: true
+      %td= text_field_tag nil, @user.name, disabled: true
+    %tr
+      %td= f.label :organization_id
+      %td= f.select :organization_id, options_for_select(Organization.all.map{ |o| [o.name, o.id] })
     %tr
       %td= f.label :password, "New password"
       %td= f.password_field :password

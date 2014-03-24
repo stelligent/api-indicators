@@ -1,0 +1,7 @@
+= form_for @organization do |f|
+  %table
+    %tr
+      %td= f.label :name
+      %td= f.text_field :name
+    %tr
+      %td{colspan: 2}= f.submit "Create", class: "btn btn-primary btn-block"

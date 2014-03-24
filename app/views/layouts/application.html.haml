@@ -1,13 +1,11 @@
 !!!
 %html
   %head
-    %title
-      = content_for?(:title) ? "Status | #{yield :title}" : "Status"
+    %title= "Status" + (content_for?(:title) ? " | #{yield :title}" : "")
     /[if lt IE 9]
-      %script{src:"http://html5shim.googlecode.com/svn/trunk/html5.js", type:"text/javascript"}
+      = javascript_include_tag "//html5shim.googlecode.com/svn/trunk/html5.js"
     = stylesheet_link_tag "application", media: "all"
     = javascript_include_tag "application"
-    = javascript_include_tag "//google-code-prettify.googlecode.com/svn/loader/run_prettify.js"
     = csrf_meta_tags
   %body>
     %header.navbar.navbar-inverse.navbar-static-top
@@ -17,14 +15,20 @@
           %nav.nav-collapse.collapse
             %ul.nav.pull-right
               - unless current_user
-                %li= link_to "Log in", login_path
+                %li= link_to "Log In", login_path
               - else
-                %li= link_to "Profile", profile_path
-                %li= link_to "Users", users_path
-                %li= link_to "API", docs_path
-                %li= link_to "Log out", logout_path
-    .container{style:"margin: 20px auto;"}= yield
+                %li= link_to "My Profile", user_path(current_user)
+                - if current_user.admin?
+                  %li= link_to "Users", users_path
+                  %li= link_to "Organizations", organizations_path
+                %li= link_to "API Docs", docs_path
+                %li= link_to "Log Out", logout_path
+    .container= yield
     %footer.footer
       .container
-        Powered by
-        = image_tag "logo_stelligent.png", alt: "stelligent", title: "stelligent"
+        .pull-left
+          Powered by
+          = image_tag "logo_stelligent.png", alt: "stelligent", title: "stelligent"
+        .pull-right
+          Running revision:
+          = link_to DEPLOYED_HEAD[0...7], "https://github.com/stelligent/canaryboard/commit/#{DEPLOYED_HEAD}"

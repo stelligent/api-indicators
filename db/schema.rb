@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140109134358) do
+ActiveRecord::Schema.define(:version => 20140308222303) do
 
   create_table "events", :force => true do |t|
     t.integer  "indicator_id"
@@ -28,6 +28,17 @@ ActiveRecord::Schema.define(:version => 20140109134358) do
   end
 
   add_index "indicators", ["project_id", "service_id"], :name => "index_indicators_on_project_id_and_service_id", :unique => true
+
+  create_table "organizations", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "organizations_projects", :id => false, :force => true do |t|
+    t.integer "organization_id"
+    t.integer "project_id"
+  end
 
   create_table "projects", :force => true do |t|
     t.string   "name"
@@ -49,8 +60,10 @@ ActiveRecord::Schema.define(:version => 20140109134358) do
     t.string   "name"
     t.string   "password_digest"
     t.string   "api_key"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+    t.boolean  "admin",           :default => false
+    t.integer  "organization_id"
   end
 
 end

@@ -12,6 +12,7 @@ gem 'opendelivery'
 gem 'aws-sdk', '1.16.0'
 gem 'encrypto_signo'
 gem 'rugged', github: 'libgit2/rugged', branch: 'development', submodules: true
+gem 'pg'                                  # PostgreSQL, the database server
 
 group :assets do
   gem 'sass-rails', '~> 3.2.3'

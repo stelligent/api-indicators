@@ -13,6 +13,7 @@ gem 'aws-sdk', '1.16.0'
 gem 'encrypto_signo'
 gem 'rugged', github: 'libgit2/rugged', branch: 'development', submodules: true
 
+gem 'pg'
 group :assets do
   gem 'sass-rails', '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'

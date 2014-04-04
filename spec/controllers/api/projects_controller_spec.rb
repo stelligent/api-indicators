@@ -48,6 +48,19 @@ describe Api::ProjectsController do
     context "as user" do
       let(:user_type) { :user }
 
+      describe "GET #index" do
+        let(:project) { FactoryGirl.create(:project) }
+
+        before do
+          user.organization.projects << project
+        end
+
+        it "renders JSON of available projects" do
+          get :index
+          expect(response.body).to eq([{ id: project.id, name: project.name, description: "" }].to_json)
+        end
+      end
+
       describe "POST #create" do
         it "does nothing" do
           post :create, project: { name: "qvb" }

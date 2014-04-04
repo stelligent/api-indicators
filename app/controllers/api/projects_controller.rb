@@ -3,7 +3,7 @@ class Api::ProjectsController < ApiController
 
   # GET /api/projects
   def index
-    respond_with Project.where(project_id: available_projects).all.map(&:api_return_format)
+    respond_with Project.where(id: available_projects).all.map(&:api_return_format)
   end
 
   # POST /api/projects

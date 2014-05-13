@@ -29,6 +29,16 @@
       "MaxLength": "41",
       "AllowedPattern": "[a-zA-Z0-9]*",
       "ConstraintDescription": "must contain only alphanumeric characters."
+    },
+    "SSLCertificate" : {
+      "Description": "The contents of your SSL certificate",
+      "Type": "String",
+      "NoEcho" : "true"
+    },
+    "SSLKey" : {
+      "Description": "The contents of your SSL private key file",
+      "Type": "String",
+      "NoEcho" : "true"
     }
   },
     "Resources": {
@@ -156,7 +166,8 @@
                 ],
                 "CustomRecipes": {
                     "Deploy": [
-                        "canaryboard::dbsetup"
+                        "canaryboard::dbsetup",
+                        "canaryboard::https-redirect"
                     ]
                 }
             }
@@ -195,6 +206,11 @@
                     "DocumentRoot": "public",
                     "RailsEnv": "development",
                     "AutoBundleOnDeploy": "true"
+                },
+                "EnableSsl" : true,
+                "SslConfiguration" : {
+                  "Certificate" : { "Ref" : "SSLCertificate" },
+                  "PrivateKey" : { "Ref" : "SSLKey" }
                 }
             }
         },
@@ -281,6 +297,11 @@
             "Value": {
                 "Ref": "myApp"
             }
+        },
+        "Database" : {
+            "Value" : 
+                { "Fn::GetAtt": [ "DBInstance", "Endpoint.Address" ] }
+            
         }
     }
 }

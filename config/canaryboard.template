@@ -136,8 +136,7 @@
                     }
                 },
                 "DefaultOs": "Ubuntu 12.04 LTS",
-                "DefaultAvailabilityZone": "us-west-2c",
-                "DefaultSshKeyName": "jonny-labs-west2"
+                "DefaultSshKeyName": "jonny-prod-uswest2"
             }
         },
         "myLayer": {

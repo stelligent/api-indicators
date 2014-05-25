@@ -6,6 +6,8 @@ ApiIndicators::Application.routes.draw do
       resources :events, only: [:index, :create, :show, :update, :destroy]
     end
     resources :statuses, only: :index
+    resources :users, only: [:index, :create, :show, :update, :destroy]
+    resources :organizations, only: [:index, :create, :show, :update, :destroy]
   end
 
   get "/api" => "api#show", as: :api_root
@@ -18,8 +20,8 @@ ApiIndicators::Application.routes.draw do
     get "logout" => :destroy
   end
 
-  resources :users, except: :destroy
-  resources :organizations, only: [:index, :show, :new, :create]
+  resources :users
+  resources :organizations
 
   resource :docs, only: :show
 

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :set_user, only: [:show, :edit, :update]
+  before_filter :set_user, only: [:show, :edit, :update, :destroy]
 
   def index
     if current_user.admin?
@@ -39,6 +39,11 @@ class UsersController < ApplicationController
     else
       render action: "edit"
     end
+  end
+
+  def destroy
+    @user.destroy
+    redirect_to users_path, notice: "User destroyed"
   end
 
   private

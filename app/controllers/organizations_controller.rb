@@ -1,6 +1,6 @@
 class OrganizationsController < ApplicationController
   before_filter :authorize_admin
-  before_filter :set_organization, only: [:show]
+  before_filter :set_organization, only: [:show, :edit, :update, :destroy]
 
   def index
     @organizations = Organization.all
@@ -13,6 +13,9 @@ class OrganizationsController < ApplicationController
     @organization = Organization.new
   end
 
+  def edit
+  end
+
   def create
     @organization = Organization.new(params[:organization])
 
@@ -23,11 +26,20 @@ class OrganizationsController < ApplicationController
     end
   end
 
-  private
-
-  def authorize_admin
-    redirect_to(root_path, alert: "Access denied") unless current_user.admin?
+  def update
+    if @organization.update_attributes(params[:organization])
+      redirect_to organization_path, notice: "Organization updated"
+    else
+      render action: "edit"
+    end
   end
+
+  def destroy
+    @organization.destroy
+    redirect_to organizations_path, notice: "Organization #{@organization.name} destroyed"
+  end
+
+  private
 
   def set_organization
     @organization = Organization.find(params[:id])

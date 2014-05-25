@@ -10,6 +10,10 @@ class ApplicationController < ActionController::Base
     current_user || redirect_to(login_path)
   end
 
+  def authorize_admin
+    redirect_to(root_path, alert: "Access denied") unless current_user.admin?
+  end
+
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end

@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 ruby '1.9.3'
 
 gem 'rails', '~> 3.2.17'
+gem 'active_model_serializers'
 
 gem 'haml'
 gem 'jquery-rails'

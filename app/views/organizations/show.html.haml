@@ -2,8 +2,12 @@
 
 %h3
   = @organization.name
+  %small
+    = link_to "Edit", edit_organization_path(@organization)
+    |
+    = link_to "Delete", organization_path(@organization), method: :delete, confirm: "Are you sure? This will also delete all users in the organization."
 %table.table
   %tbody
     %tr
-      %td
-      %td
+      %td Visible projects
+      %td= @organization.projects.map(&:name).join(", ")

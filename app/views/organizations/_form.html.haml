@@ -4,4 +4,7 @@
       %td= f.label :name
       %td= f.text_field :name
     %tr
-      %td{colspan: 2}= f.submit "Create", class: "btn btn-primary btn-block"
+      %td= f.label :projects
+      %td= collection_select :organization, :project_ids, Project.all, :id, :name, {}, multiple: true
+    %tr
+      %td{colspan: 2}= f.submit class: "btn btn-primary btn-block"

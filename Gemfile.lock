@@ -22,6 +22,8 @@ GEM
       rack-cache (~> 1.2)
       rack-test (~> 0.6.1)
       sprockets (~> 2.2.1)
+    active_model_serializers (0.8.1)
+      activemodel (>= 3.0)
     activemodel (3.2.17)
       activesupport (= 3.2.17)
       builder (~> 3.0.0)
@@ -95,6 +97,7 @@ GEM
       aws-sdk (= 1.16.0)
       encrypto_signo (= 1.0.0)
       json
+    pg (0.17.1)
     polyglot (0.3.4)
     rack (1.4.5)
     rack-cache (1.2)
@@ -161,6 +164,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_model_serializers
   aws-sdk (= 1.16.0)
   aws-sdk-core (~> 2.0.0.rc1)
   bcrypt-ruby
@@ -173,6 +177,7 @@ DEPENDENCIES
   haml
   jquery-rails
   opendelivery
+  pg
   rails (~> 3.2.17)
   rspec-rails
   rugged!

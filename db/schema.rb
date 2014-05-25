@@ -66,4 +66,6 @@ ActiveRecord::Schema.define(:version => 20140308222303) do
     t.integer  "organization_id"
   end
 
+  add_index "users", ["api_key"], :name => "index_users_on_api_key", :unique => true
+
 end

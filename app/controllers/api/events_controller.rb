@@ -1,6 +1,6 @@
 class Api::EventsController < ApiController
   before_filter :get_events
-  before_filter :get_event, only: [ :show, :update, :destroy ]
+  before_filter :get_event, only: [:show, :update, :destroy]
 
   # GET /api/indicators/:indicator_id/events
   def index
@@ -31,11 +31,11 @@ class Api::EventsController < ApiController
     respond_with @event
   end
 
-private
+  private
 
   def get_events
     @indicator ||= Indicator.find(params[:indicator_id])
-    raise unless available_projects.include?(@indicator.project_id)
+    raise unless available_projects.include?(@indicator.project_id) and available_services.include?(@indicator.service_id)
     @events ||= @indicator.events.includes(:status)
   rescue
     render(nothing: true) and return

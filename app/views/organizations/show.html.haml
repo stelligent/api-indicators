@@ -11,3 +11,6 @@
     %tr
       %td Visible projects
       %td= @organization.projects.map(&:name).join(", ")
+    %tr
+      %td Visible services
+      %td= @organization.services.map(&:name).join(", ")

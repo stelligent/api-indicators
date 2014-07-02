@@ -45,7 +45,7 @@ class Indicator < ActiveRecord::Base
     }
   end
 
-private
+  private
 
   # Used in after_create callback.
   # Sets default state of every new indicator.

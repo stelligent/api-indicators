@@ -7,4 +7,7 @@
       %td= f.label :projects
       %td= collection_select :organization, :project_ids, Project.all, :id, :name, {}, multiple: true
     %tr
+      %td= f.label :services
+      %td= collection_select :organization, :service_ids, Service.all, :id, :name, {}, multiple: true
+    %tr
       %td{colspan: 2}= f.submit class: "btn btn-primary btn-block"

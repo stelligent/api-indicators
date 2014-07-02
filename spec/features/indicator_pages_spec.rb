@@ -8,6 +8,7 @@ describe "Indicator pages" do
 
   before do
     user.organization.projects << project
+    user.organization.services << service
     sign_in(user)
   end
 

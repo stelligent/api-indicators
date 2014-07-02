@@ -3,7 +3,7 @@ class Api::IndicatorsController < ApiController
 
   # GET /api/indicators
   def index
-    respond_with Indicator.where(project_id: available_projects).includes(:project, :service, :events).all.map(&:api_return_format)
+    respond_with Indicator.where(project_id: available_projects, service_id: available_services).includes(:project, :service, :events).all.map(&:api_return_format)
   end
 
   # GET /api/indicators/:id
@@ -21,7 +21,7 @@ class Api::IndicatorsController < ApiController
 
   def get_indicator
     @indicator ||= Indicator.find(params[:id])
-    raise unless available_projects.include?(@indicator.project_id)
+    raise unless available_projects.include?(@indicator.project_id) and available_services.include?(@indicator.service_id)
   rescue
     render(nothing: true) and return
   end

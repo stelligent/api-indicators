@@ -8,6 +8,7 @@ describe IndicatorsController do
 
   before do
     user.organization.projects << project
+    user.organization.services << service
   end
 
   context "unauthorized" do

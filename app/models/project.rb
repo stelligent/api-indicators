@@ -17,13 +17,13 @@ class Project < ActiveRecord::Base
     }
   end
 
-private
+  private
 
   # Used in after_create callback.
   # Creates indicators of each service for newly created project.
   def create_indicators
-    Service.all.each do |type|
-      indicators.create(service_id: type.id)
+    Service.all.each do |service|
+      indicators.create(service_id: service.id)
     end
   end
 end

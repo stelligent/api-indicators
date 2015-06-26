@@ -52,6 +52,8 @@ After your CanaryBoard Rails app is up and running, you can use the examples her
 * **update-indicators.rb** - You can customize and [update-indicators.rb](https://gist.github.com/PaulDuvall/f6c59b78fc8af286f5c8) (making the appropriate changes to *API_URL* and *API_KEY*).
 * You can also view [api-usage-example](https://github.com/stelligent/canaryboard/blob/master/script/api-usage-example) to update the status indicators for projects and services
 
+(Note: if you're having trouble running the scripts, you may need to run them as `sudo`. It shouldn't be necessary but has gotten some people around issues.)
+
 ## More Information
 
 For more information, you can read the [Agile DevOps: Build a DevOps dashboard](http://www.ibm.com/developerworks/agile/library/a-devops10/) from IBM developerWorks on using CanaryBoard.
